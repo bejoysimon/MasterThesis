@@ -1,11 +1,11 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Twitter Login/Logout</title>
+    <title>FootySquadPro Home</title>
   </head>
   <body>
     {% if user %}
-    <p>{{ welcome }} {{ user.email() }}. Welcome to Twitter!</p>
+    <p>{{ welcome }} {{ user.email() }}. Welcome to FootySquadPro!</p>
     <a href="/userSignUp">User Sign In or Sign Up</a>
     <br/>
     <!-- <form method="post" action="/">
@@ -14,9 +14,9 @@
     </form>
     {% if username %}
     <p>Welcome {{ username }}. <a href="/userProfile">Visit your profile</a></p>
-    {% endif %} -->   
+    {% endif %} -->
     {% else %}
-    <p>Hello guest, welcome to Twitter!</p>
+    <p>Hello guest, welcome to FootySquadPro!</p>
     {% endif %}
     <p>You can {{ url_string }} <a href='{{ url }}'>here.</a></p>
   </body>
