@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Twitter Login/Logout</title>
+  </head>
+  <body>
+    {% if user %}
+    <p>{{ welcome }} {{ user.email() }}. Welcome to Twitter!</p>
+    <a href="/userSignUp">User Sign In or Sign Up</a>
+    <br/>
+    <!-- <form method="post" action="/">
+    Enter username: <input type="text" name="username" required />
+    <input type="submit" value="Submit" name="button"/>
+    </form>
+    {% if username %}
+    <p>Welcome {{ username }}. <a href="/userProfile">Visit your profile</a></p>
+    {% endif %} -->
+    {% else %}
+    <p>Hello guest, welcome to Twitter!</p>
+    {% endif %}
+    <p>You can {{ url_string }} <a href='{{ url }}'>here.</a></p>
+  </body>
+</html>

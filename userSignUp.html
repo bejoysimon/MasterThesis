@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>User SignUp</title>
+  </head>
+  <body>
+    {% if actual_username %}
+      <form method="post" action="/userSignUp">
+      Enter your existing username: <input type="text" name="username" required />
+      <input type="submit" value="Submit" name="button"/>
+      </form>
+    {% else %}
+      <form method="post" action="/userSignUp">
+      <p>Choose a username: <input type="text" name="username" pattern="^[a-zA-Z]+$" required /></p>
+      <p>Enter Name: <input type="text" name="name" required /></p>
+      <p>About me: <br/><textarea name="bio" maxlength="280" rows="4" cols="70" required></textarea></p>
+      <input type="submit" value="Create" name="button"/>
+      </form>
+    {% endif %}
+    <form method="get" action="/">
+    <input type="submit" value="Go HOME" name="button"/>
+    </form>
+  </body>
+</html>
