@@ -3,15 +3,13 @@ import jinja2
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import os
+import csv
 
 from myuser import MyUser
 from userModel import UserModel
 from tweetsModel import TweetsModel
 from userSignUp import UserSignUp
 from userProfile import UserProfile
-from editProfile import EditProfile
-from searchedProfile import SearchedProfile
-from editTweet import EditTweet 
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -29,6 +27,7 @@ class MainPage(webapp2.RequestHandler):
         welcome = 'Welcome back'
 
         user = users.get_current_user()
+        admin = False
 
         if user:
             url = users.create_logout_url(self.request.uri)
@@ -37,10 +36,16 @@ class MainPage(webapp2.RequestHandler):
             myuser_key = ndb.Key('MyUser', user.user_id())
             myuser = myuser_key.get()
 
-            if myuser == None:
+            if users.is_current_user_admin():
                 welcome = 'Welcome to the application'
-                myuser = MyUser(id=user.user_id(), email = user.email())
+                myuser = MyUser(id=user.user_id(), email = user.email(), username = 'admin')
                 myuser.put()
+                admin = True
+
+                if myuser == None:
+                    welcome = 'Welcome to the application'
+                    myuser = MyUser(id=user.user_id(), email = user.email())
+                    myuser.put()
 
         else:
             url = users.create_login_url(self.request.uri)
@@ -51,6 +56,7 @@ class MainPage(webapp2.RequestHandler):
             'url' : url,
             'url_string' : url_string,
             'user' : user,
+            'admin' : admin,
             'welcome' : welcome,
         }
 
@@ -61,7 +67,4 @@ class MainPage(webapp2.RequestHandler):
 # starts the web application we specify the full routing table here as well
 app = webapp2.WSGIApplication([('/', MainPage),
                                 ('/userSignUp', UserSignUp),
-                                ('/userProfile', UserProfile),
-                                ('/editProfile', EditProfile),
-                                ('/searchedProfile', SearchedProfile),
-                                ('/editTweet', EditTweet),], debug=True)
+                                ('/userProfile', UserProfile),], debug=True)

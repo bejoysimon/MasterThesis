@@ -5,9 +5,13 @@
   </head>
   <body>
     {% if user %}
-    <p>{{ welcome }} {{ user.email() }}. Welcome to FootySquadPro!</p>
-    <a href="/userSignUp">User Sign In or Sign Up</a>
-    <br/>
+    <p>{{ welcome }} {{ user.email() }}. <br/> Welcome to FootySquadPro!</p>
+      {% if admin %}
+      <a href="/adminPage">Admin Page</a><br/>
+      {% else %}
+      <a href="/userSignUp">User Sign In or Sign Up</a>
+      <br/>
+      {% endif %}
     <!-- <form method="post" action="/">
     Enter username: <input type="text" name="username" required />
     <input type="submit" value="Submit" name="button"/>
