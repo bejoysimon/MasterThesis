@@ -10,6 +10,10 @@ from userModel import UserModel
 from tweetsModel import TweetsModel
 from userSignUp import UserSignUp
 from userProfile import UserProfile
+from adminPage import AdminPage
+from addPlayersData import AddPlayersData
+from blobCollection import BlobCollection
+from uploadHandler import UploadHandler
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -38,14 +42,25 @@ class MainPage(webapp2.RequestHandler):
 
             if users.is_current_user_admin():
                 welcome = 'Welcome to the application'
+
                 myuser = MyUser(id=user.user_id(), email = user.email(), username = 'admin')
                 myuser.put()
+
+                admin_key = ndb.Key('UserModel', myuser.username)
+                admin_user = admin_key.get()
+
+                admin_user = UserModel(id = myuser.username,
+                                        email = user.email(),
+                                        username = myuser.username,
+                                        name = 'Administrator',
+                                        bio = None)
+                admin_user.put()
                 admin = True
 
-                if myuser == None:
-                    welcome = 'Welcome to the application'
-                    myuser = MyUser(id=user.user_id(), email = user.email())
-                    myuser.put()
+            if myuser == None:
+                welcome = 'Welcome to the application'
+                myuser = MyUser(id=user.user_id(), email = user.email())
+                myuser.put()
 
         else:
             url = users.create_login_url(self.request.uri)
@@ -67,4 +82,7 @@ class MainPage(webapp2.RequestHandler):
 # starts the web application we specify the full routing table here as well
 app = webapp2.WSGIApplication([('/', MainPage),
                                 ('/userSignUp', UserSignUp),
-                                ('/userProfile', UserProfile),], debug=True)
+                                ('/userProfile', UserProfile),
+                                ('/adminPage', AdminPage),
+                                ('/addPlayersData', AddPlayersData),
+                                ('/upload', UploadHandler)], debug=True)
