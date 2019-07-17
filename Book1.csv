@@ -1,0 +1,4 @@
+Name,Team,Position,Cost,Creativity,Influence,Threat,ICT,Goals_conceded,Goals_scored,Assists,Own_goals,Penalties_missed,Penalties_saved,Saves,Yellow_cards,Red_cards,TSB,Minutes,Bonus,Points
+Adam Smith,BOU,DEF,45,345.5,455,144,94.5,38,1,3,0,0,0,0,6,0,0.3,2067,3,56
+Adrian,WHU,GKP,45,0,470.4,0,47,29,0,0,0,0,0,69,2,0,0.6,1710,5,72
+Aguero,MCI,FWD,110,570.8,966.4,1484,302.5,12,21,6,0,0,0,0,2,0,12.6,1960,22,169

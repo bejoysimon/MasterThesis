@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
   </head>
   <body>
-    Add Player's Data to PlayersData Store from a File<br/><br/>
+    Import Player's data to datastore from a file<br/><br/>
     <!-- form for uploading a file to the blobstore -->
     <form action="{{ upload_url }}" method="post" enctype="multipart/form-data">
     Upload File: <input type="file" name="file" required /><br/><br/>
@@ -15,7 +15,6 @@
     {% for i in collection.filenames %}
     {{ i }}
     {% endfor %}
-    {{ msg }}
     <form method="get" action="/">
     <input type="submit" value="Go HOME" name="button"/>
     </form>

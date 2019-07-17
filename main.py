@@ -7,7 +7,6 @@ import csv
 
 from myuser import MyUser
 from userModel import UserModel
-from tweetsModel import TweetsModel
 from userSignUp import UserSignUp
 from userProfile import UserProfile
 from adminPage import AdminPage

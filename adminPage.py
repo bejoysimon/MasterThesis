@@ -6,7 +6,6 @@ import os
 
 from myuser import MyUser
 from userModel import UserModel
-from tweetsModel import TweetsModel
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(

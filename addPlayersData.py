@@ -44,6 +44,3 @@ class AddPlayersData(webapp2.RequestHandler):
 
         if action == "Go HOME":
             self.redirect('/')
-
-
-# app = webapp2.WSGIApplication([('/upload', UploadHandler)])
