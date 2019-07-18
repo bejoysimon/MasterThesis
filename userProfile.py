@@ -25,10 +25,7 @@ class UserProfile(webapp2.RequestHandler):
         unique_key = ndb.Key('UserModel', username)
         unique_user = unique_key.get()
 
-        timeline = TweetsModel.query().filter(TweetsModel.username.IN(unique_user.followings)).order(-TweetsModel.posted_time).fetch(limit = 50)
-
         template_values = {'unique_user' : unique_user,
-                            'timeline' : timeline,
                             'error' : error,
                             'result' : result}
 
@@ -45,8 +42,6 @@ class UserProfile(webapp2.RequestHandler):
         unique_key = ndb.Key('UserModel', myuser.username)
         unique_user = unique_key.get()
 
-        timeline = TweetsModel.query().filter(TweetsModel.username.IN(unique_user.followings)).order(-TweetsModel.posted_time).fetch(limit = 50)
-
         error1 = ''
         error2 = ''
         result = ''
@@ -56,64 +51,10 @@ class UserProfile(webapp2.RequestHandler):
         if action == "Logout":
             self.redirect("/")
 
-        if action == "Post":
-            new_tweet = self.request.get('new_tweet')
-            tweet_words_list = new_tweet.split(" ")
 
-            # unique_user.tweets_list.append(new_tweet)
-            # unique_user.put()
+        template_values = {'unique_user' : unique_user,
+                            'searched_tweets' : searched_tweets,
+                            'error2' : error2}
 
-            adding_tweet = TweetsModel(id = new_tweet,
-                                        username = myuser.username,
-                                        tweet = new_tweet,
-                                        tweet_words = tweet_words_list)
-            adding_tweet.put()
-
-            self.redirect('/userProfile?username='+myuser.username)
-
-        if action == "Edit Profile":
-            self.redirect("/editProfile?username="+myuser.username)
-
-        if action == "Search":
-            searched_username = self.request.get('searched_username')
-
-            if searched_username != myuser.username:
-                query = MyUser.query(MyUser.username == searched_username)
-
-                if query.count() == 0:
-                    error1 = "No such username exists!"
-                    result = ""
-
-                else:
-                    for i in query:
-                        result = i.username
-
-            template_values = {'unique_user' : unique_user,
-                                'timeline' : timeline,
-                                'error1' : error1,
-                                'result' : result}
-
-            template = JINJA_ENVIRONMENT.get_template('userProfile.html')
-            self.response.write(template.render(template_values))
-
-        if action == "LookUp":
-            searched_content = self.request.get('searched_content')
-            terms = searched_content.split(" ")
-            query = TweetsModel.query()
-
-            for t in terms:
-                query = query.filter(TweetsModel.tweet_words == t)
-
-            searched_tweets = query.fetch()
-
-            if query.count() == 0:
-                error2 = "No tweets for the given search content!"
-
-
-            template_values = {'unique_user' : unique_user,
-                                'timeline' : timeline,
-                                'searched_tweets' : searched_tweets,
-                                'error2' : error2}
-
-            template = JINJA_ENVIRONMENT.get_template('userProfile.html')
-            self.response.write(template.render(template_values))
+        template = JINJA_ENVIRONMENT.get_template('userProfile.html')
+        self.response.write(template.render(template_values))

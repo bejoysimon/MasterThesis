@@ -42,5 +42,5 @@ class AddPlayersData(webapp2.RequestHandler):
 
         action=self.request.get('button')
 
-        if action == "Go HOME":
+        if action == "Home":
             self.redirect('/')

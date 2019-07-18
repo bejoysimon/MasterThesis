@@ -5,15 +5,16 @@
   </head>
   <body>
     <form method="post" action="/userProfile">
-      <p>Welcome {{ unique_user.username }} to your FootySquadPro Home. </p>
+      <p>Welcome {{ unique_user.username }} to your FootySquadPro Profile. </p>
       Username: {{ unique_user.username }}<br/>
       Email: {{ unique_user.email }}<br/>
       Name: {{ unique_user.name }}<br/><br/>
-      <input type="submit" value="Edit Profile" name="button"/>
-      <form method="get" action="/">
-        <input type="submit" value="Logout" name="button"/>
-      </form>
-      <input type="submit" value="Player Profiles" name="button"/>
+    </form>
+    <form>
+      <input type="submit" value="Build My Squad" name="button"/>
+    </form>
+    <form method="get" action="/">
+      <input type="submit" value="Logout" name="button"/>
     </form>
   </body>
 </html>

@@ -36,7 +36,7 @@ class UserSignUp(webapp2.RequestHandler):
 
         action=self.request.get('button')
 
-        if action == "Go HOME":
+        if action == "Home":
             self.redirect('/')
 
         if action == 'Submit':
@@ -60,7 +60,6 @@ class UserSignUp(webapp2.RequestHandler):
 
             username = self.request.get('username')
             name = self.request.get('name')
-            bio = self.request.get('bio')
             actual_username = myuser.username
 
             query_username = MyUser.query(MyUser.username == username)
@@ -77,9 +76,7 @@ class UserSignUp(webapp2.RequestHandler):
                     unique_user = UserModel(id = username,
                                             email = user.email(),
                                             username = username,
-                                            name = name,
-                                            bio = bio)
-                    unique_user.followings.append(username)
+                                            name = name,)
                     unique_user.put()
 
                     self.redirect('/userProfile?username='+username)
