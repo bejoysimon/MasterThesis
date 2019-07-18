@@ -67,7 +67,6 @@ class UserSignUp(webapp2.RequestHandler):
             unique_key = ndb.Key('UserModel', username)
             unique_user = unique_key.get()
 
-
             if query_username.count() == 0:
                 if myuser.username == None:
                     myuser.username = username

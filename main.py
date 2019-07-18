@@ -9,6 +9,7 @@ from myuser import MyUser
 from userModel import UserModel
 from userSignUp import UserSignUp
 from userProfile import UserProfile
+from payments import Payments
 from scoring import Scoring
 from rules import Rules
 from adminPage import AdminPage
@@ -42,7 +43,7 @@ class MainPage(webapp2.RequestHandler):
             myuser = myuser_key.get()
 
             if users.is_current_user_admin():
-                welcome = 'Welcome to the application'
+                welcome = 'Welcome'
 
                 myuser = MyUser(id=user.user_id(), email = user.email(), username = 'admin')
                 myuser.put()
@@ -59,7 +60,7 @@ class MainPage(webapp2.RequestHandler):
                 admin = True
 
             if myuser == None:
-                welcome = 'Welcome to the application'
+                welcome = 'Welcome'
                 myuser = MyUser(id=user.user_id(), email = user.email())
                 myuser.put()
 
@@ -84,6 +85,7 @@ class MainPage(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([('/', MainPage),
                                 ('/userSignUp', UserSignUp),
                                 ('/userProfile', UserProfile),
+                                ('/payments', Payments),
                                 ('/scoring', Scoring),
                                 ('/rules', Rules),
                                 ('/adminPage', AdminPage),

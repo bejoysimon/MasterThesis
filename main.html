@@ -4,21 +4,15 @@
     <title>FootySquadPro</title>
   </head>
   <body>
+    <h2>FootySquadPro</h2>
     {% if user %}
-    <p>{{ welcome }} {{ user.email() }}. <br/> Welcome to FootySquadPro!</p>
+    <p>{{ welcome }} {{ user.email() }} to FootySquadPro! </p>
       {% if admin %}
       <a href="/adminPage">Admin Page</a><br/>
       {% else %}
-      <a href="/userSignUp">User Sign In or Sign Up</a>
+      <a href="/userSignUp">Sign In / Register</a>
       <br/>
       {% endif %}
-    <!-- <form method="post" action="/">
-    Enter username: <input type="text" name="username" required />
-    <input type="submit" value="Submit" name="button"/>
-    </form>
-    {% if username %}
-    <p>Welcome {{ username }}. <a href="/userProfile">Visit your profile</a></p>
-    {% endif %} -->
     {% else %}
     <p>Hello guest, welcome to FootySquadPro!</p>
     {% endif %}
