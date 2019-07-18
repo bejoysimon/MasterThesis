@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Scoring System</title>
+  </head>
+  <body>
+    <div class="">
+      <a href="/userProfile?username={{ unique_user.username }}">Back to profile.</a>
+      <h2>Player Action</h2>
+      <ul>
+        <li>Players receive points for different actions during a single match.</li>
+        <li>Points from each match are accumulated throughout the duration of the contest.</li>
+      </ul>
+      <table>
+        <tr><th>Action</th><th>Points</th></tr>
+        <tr><td>For playing up to 60 minutes</td><td>1</td></tr>
+        <tr><td>For playing more than 60 minutes</td><td>2</td></tr>
+        <tr><td>For each goal scored by a goalkeeper or defender</td><td>6</td></tr>
+        <tr><td>For each goal scored by a midfielder</td><td>5</td></tr>
+        <tr><td>For each goal scored by a forward</td><td>4</td></tr>
+        <tr><td>For each goal assist</td><td>3</td></tr>
+        <tr><td>For a clean sheet by a goalkeeper or defender (more than 60 minutes played)</td><td>4</td></tr>
+        <tr><td>For a clean sheet by a midfielder (more than 60 minutes played)</td><td>1</td></tr>
+        <tr><td>For every 3 shot saved by a goalkeeper</td><td>1</td></tr>
+        <tr><td>For each penalty save</td><td>5</td></tr>
+        <tr><td>For each penalty miss</td><td>-2</td></tr>
+        <tr><td>For every 2 goals conceded by a goalkeeper or defender</td><td>-1</td></tr>
+        <tr><td>For each yellow card</td><td>-1</td></tr>
+        <tr><td>For each red card</td><td>-3</td></tr>
+        <tr><td>For each own goal</td><td>-2</td></tr>
+      </table>
+      <ul>
+        <li>If a player receives a red card, they will continue to be penalised for goals conceded by their team.</li>
+      </ul>
+      <h2>Bonus Points</h2>
+      <ul>
+        <li>Players in each match compete for bonus points based on different actions during the game.</li>
+        <li>The three best performing players in each match receives additional bonus points in each match.</li>
+      </ul>
+      <table>
+        <tr><th>Action</th><th>Points</th></tr>
+        <tr><td>Best performing player</td><td>3</td></tr>
+        <tr><td>2nd best performing player</td><td>2</td></tr>
+        <tr><td>3rd best performing player</td><td>1</td></tr>
+      </table>
+      <ul>
+        <li>If there is a tie, the same amount for points will be given to the players with the same amount of performance points.</li>
+        <li>We use the following actions to define how bonus points are awarded.</li>
+      </ul>
+      <table>
+        <tr><th>Action</th><th>Points</th></tr>
+        <tr><td>For playing up to 60 minutes</td><td>3</td></tr>
+        <tr><td>For playing more than 60 minutes</td><td>6</td></tr>
+        <tr><td>For each goal scored by a goalkeeper or defender</td><td>12</td></tr>
+        <tr><td>For each goal scored by a midfielder</td><td>18</td></tr>
+        <tr><td>For each goal scored by a forward</td><td>24</td></tr>
+        <tr><td>For each goal assist</td><td>9</td></tr>
+        <tr><td>For a clean sheet by a goalkeeper or defender (more than 60 minutes played)</td><td>12</td></tr>
+        <tr><td>For each penalty save</td><td>15</td></tr>
+        <tr><td>For each save</td><td>2</td></tr>
+        <tr><td>For each open play cross</td><td>1</td></tr>
+        <tr><td>For each big chance created</td><td>3</td></tr>
+        <tr><td>For each successful dribble</td><td>1</td></tr>
+        <tr><td>For every 2 clearances, blocks and interceptions</td><td>1</td></tr>
+        <tr><td>For every 3 recoveries</td><td>1</td></tr>
+        <tr><td>For 70 to 79% pass completion (at least 30 passes attempted)</td><td>2</td></tr>
+        <tr><td>For 80 to 89% pass completion (at least 30 passes attempted)</td><td>4</td></tr>
+        <tr><td>For 90%+ pass completion (at least 30 passes attempted)</td><td>6</td></tr>
+        <tr><td>For each key pass</td><td>1</td></tr>
+        <tr><td>For each net successful tackle (Successful tackles - Unsuccessful tackles) (Cannot be negative)</td><td>2</td></tr>
+        <tr><td>For each penalty conceded</td><td>-3</td></tr>
+        <tr><td>For each penalty miss</td><td>-6</td></tr>
+        <tr><td>For each yellow card</td><td>-3</td></tr>
+        <tr><td>For each red card</td><td>-9</td></tr>
+        <tr><td>For each own goal</td><td>-6</td></tr>
+        <tr><td>For each big chance missed</td><td>-3</td></tr>
+        <tr><td>For each error which leads to a goal</td><td>-3</td></tr>
+        <tr><td>For each error which leads to an attempt at goal</td><td>-1</td></tr>
+        <tr><td>For each time being tackled</td><td>-1</td></tr>
+        <tr><td>For each foul conceded</td><td>-1</td></tr>
+        <tr><td>For each time being caught offside</td><td>-1</td></tr>
+        <tr><td>For each shot off target</td><td>-1</td></tr>
+      </table>
+    </div>
+  </body>
+</html>

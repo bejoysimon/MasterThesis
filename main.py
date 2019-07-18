@@ -9,6 +9,8 @@ from myuser import MyUser
 from userModel import UserModel
 from userSignUp import UserSignUp
 from userProfile import UserProfile
+from scoring import Scoring
+from rules import Rules
 from adminPage import AdminPage
 from addPlayersData import AddPlayersData
 from blobCollection import BlobCollection
@@ -82,6 +84,8 @@ class MainPage(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([('/', MainPage),
                                 ('/userSignUp', UserSignUp),
                                 ('/userProfile', UserProfile),
+                                ('/scoring', Scoring),
+                                ('/rules', Rules),
                                 ('/adminPage', AdminPage),
                                 ('/addPlayersData', AddPlayersData),
                                 ('/upload', UploadHandler)], debug=True)
