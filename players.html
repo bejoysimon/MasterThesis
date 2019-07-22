@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Player Profiles</title>
+  </head>
+  <body>
+    <form method="get" action="/">
+      <input type="submit" value="Logout" name="button"/>
+    </form>
+    <a href="/userProfile?username={{ unique_user.username }}">Back to my profile.</a>
+    <h2>Player Profiles</h2>
+    Welcome {{ unique_user.username }} to Player Profiles.<br/><br/>
+    <form method="post" action="/players">
+      View players by their playing position. Choose a position below:<br/>
+      <p><input type="radio" name="position" value="GKP">Goalkeepers
+      <input type="radio" name="position" value="DEF">Defenders
+      <input type="radio" name="position" value="MID">Midfielders
+      <input type="radio" name="position" value="FWD">Forwards</p>
+      <input type="submit" value="View" name="button"/><br/><br/>
+    </form>
+    <!-- {% for i in result %}
+    {{ loop.index }}.  {{ i }}<br/><br/>
+    {% endfor %} -->
+    {% if result %}
+    <table>
+      <tr>
+        <th>Name</th><th>Team</th><th>Position</th><th>Cost</th><th>Creativity</th><th>Influence</th>
+        <th>Threat</th><th>ICT</th><th>Goals Conceded</th><th>Goals Scored</th><th>Assists</th>
+        <th>Own Goals</th><th>Penalties Missed</th><th>Penalties Saved</th><th>Saves</th>
+        <th>Yellow Cards</th><th>Red Cards</th><th>TSB</th><th>Minutes</th><th>Bonus</th><th>Points</th>
+      </tr>
+      {% for i in result %}
+      <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.team }}</td>
+        <td>{{ i.position }}</td>
+        <td>{{ i.cost }}</td>
+        <td>{{ i.creativity }}</td>
+        <td>{{ i.influence }}</td>
+        <td>{{ i.threat }}</td>
+        <td>{{ i.ict }}</td>
+        <td>{{ i.goals_conceded }}</td>
+        <td>{{ i.goals_scored }}</td>
+        <td>{{ i.assists }}</td>
+        <td>{{ i.own_goals }}</td>
+        <td>{{ i.penalties_missed }}</td>
+        <td>{{ i.penalties_saved }}</td>
+        <td>{{ i.saves }}</td>
+        <td>{{ i.yellow_cards }}</td>
+        <td>{{ i.red_cards }}</td>
+        <td>{{ i.tsb }}</td>
+        <td>{{ i.minutes }}</td>
+        <td>{{ i.bonus }}</td>
+        <td>{{ i.points }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </body>
+</html>

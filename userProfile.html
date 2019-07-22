@@ -15,7 +15,8 @@
       Name: {{ unique_user.name }}<br/>
       Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}">Manage</a><br/><br/>
       <a href="/scoring?username={{ unique_user.username }}">Scoring System</a>
-      <a href="/rules?username={{ unique_user.username }}">Game Rules</a></p>
+      <a href="/rules?username={{ unique_user.username }}">Game Rules</a>
+      <a href="/players?username={{ unique_user.username }}">Player Profiles</a></p>
     </form>
     <form>
       <input type="submit" value="My Squad" name="button"/>

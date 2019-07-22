@@ -12,6 +12,7 @@ from userProfile import UserProfile
 from payments import Payments
 from scoring import Scoring
 from rules import Rules
+from players import Players
 from adminPage import AdminPage
 from addPlayersData import AddPlayersData
 from blobCollection import BlobCollection
@@ -54,8 +55,7 @@ class MainPage(webapp2.RequestHandler):
                 admin_user = UserModel(id = myuser.username,
                                         email = user.email(),
                                         username = myuser.username,
-                                        name = 'Administrator',
-                                        bio = None)
+                                        name = 'Administrator')
                 admin_user.put()
                 admin = True
 
@@ -88,6 +88,7 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                 ('/payments', Payments),
                                 ('/scoring', Scoring),
                                 ('/rules', Rules),
+                                ('/players', Players),
                                 ('/adminPage', AdminPage),
                                 ('/addPlayersData', AddPlayersData),
                                 ('/upload', UploadHandler)], debug=True)
