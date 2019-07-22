@@ -15,7 +15,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True
 )
 
-class Players(webapp2.RequestHandler):
+class PlayerStats(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
 
@@ -26,7 +26,7 @@ class Players(webapp2.RequestHandler):
 
         template_values = {'unique_user' : unique_user}
 
-        template = JINJA_ENVIRONMENT.get_template('players.html')
+        template = JINJA_ENVIRONMENT.get_template('playerStats.html')
         self.response.write(template.render(template_values))
 
     def post(self):
@@ -54,5 +54,5 @@ class Players(webapp2.RequestHandler):
             template_values = {'unique_user' : unique_user,
                                 'result' : query}
 
-            template = JINJA_ENVIRONMENT.get_template('players.html')
+            template = JINJA_ENVIRONMENT.get_template('playerStats.html')
             self.response.write(template.render(template_values))

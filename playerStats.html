@@ -1,26 +1,23 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Player Profiles</title>
+    <title>Player Stats</title>
   </head>
   <body>
     <form method="get" action="/">
       <input type="submit" value="Logout" name="button"/>
     </form>
     <a href="/userProfile?username={{ unique_user.username }}">Back to my profile.</a>
-    <h2>Player Profiles</h2>
-    Welcome {{ unique_user.username }} to Player Profiles.<br/><br/>
-    <form method="post" action="/players">
-      View players by their playing position. Choose a position below:<br/>
+    <h2>Player Statistics</h2>
+    Welcome {{ unique_user.username }} to Player Statistics page.<br/><br/>
+    <form method="post" action="/playerStats">
+      View player statistics by their playing position. Choose a position below:<br/>
       <p><input type="radio" name="position" value="GKP">Goalkeepers
       <input type="radio" name="position" value="DEF">Defenders
       <input type="radio" name="position" value="MID">Midfielders
       <input type="radio" name="position" value="FWD">Forwards</p>
       <input type="submit" value="View" name="button"/><br/><br/>
     </form>
-    <!-- {% for i in result %}
-    {{ loop.index }}.  {{ i }}<br/><br/>
-    {% endfor %} -->
     {% if result %}
     <table>
       <tr>
