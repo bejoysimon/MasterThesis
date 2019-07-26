@@ -13,6 +13,7 @@ from payments import Payments
 from scoring import Scoring
 from rules import Rules
 from playerStats import PlayerStats
+from playerProfile import PlayerProfile
 from adminPage import AdminPage
 from addPlayersData import AddPlayersData
 from blobCollection import BlobCollection
@@ -89,6 +90,7 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                 ('/scoring', Scoring),
                                 ('/rules', Rules),
                                 ('/playerStats', PlayerStats),
+                                ('/playerProfile', PlayerProfile),
                                 ('/adminPage', AdminPage),
                                 ('/addPlayersData', AddPlayersData),
                                 ('/upload', UploadHandler)], debug=True)

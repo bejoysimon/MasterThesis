@@ -42,7 +42,7 @@ class UserProfile(webapp2.RequestHandler):
 
         if action == "Logout":
             self.redirect("/")
-
+            
 
         template_values = {'unique_user' : unique_user}
 

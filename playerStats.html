@@ -10,6 +10,9 @@
     <a href="/userProfile?username={{ unique_user.username }}">Back to my profile.</a>
     <h2>Player Statistics</h2>
     Welcome {{ unique_user.username }} to Player Statistics page.<br/><br/>
+    <div class="">
+      {{figure}}
+    </div>
     <form method="post" action="/playerStats">
       View player statistics by their playing position. Choose a position below:<br/>
       <p><input type="radio" name="position" value="GKP">Goalkeepers
@@ -28,7 +31,7 @@
       </tr>
       {% for i in result %}
       <tr>
-        <td>{{ i.name }}</td>
+        <td><a href="/playerProfile?username={{ unique_user.username }}&name={{ i.name }}">{{ i.name }}</a></td>
         <td>{{ i.team }}</td>
         <td>{{ i.position }}</td>
         <td>{{ i.cost }}</td>
