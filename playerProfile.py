@@ -2,6 +2,7 @@ import webapp2
 import jinja2
 from google.appengine.api import users
 from google.appengine.ext import ndb
+from google.appengine.api import images
 import os
 
 from myuser import MyUser
@@ -28,7 +29,7 @@ class PlayerProfile(webapp2.RequestHandler):
         playerData_key = ndb.Key('PlayersData', player_name)
         playerData = playerData_key.get()
 
-        img = "sample_player_pic.png"
+        img = '/static/Aguero.png'
 
         template_values = {'unique_user' : unique_user, 'player' : playerData, 'img' : img}
 

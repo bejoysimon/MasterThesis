@@ -7,5 +7,11 @@ libraries:
   version: latest
 
 handlers:
+- url: /static
+  static_dir: static
+  # mime_type: image/png
+  # static_files: /static/(.*\.png)
+  # upload: /static/(.*\.png)
+
 - url: /.*
-  script: main.app 
+  script: main.app
