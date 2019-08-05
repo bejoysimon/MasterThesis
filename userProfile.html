@@ -9,7 +9,6 @@
     </form>
     <h2>My Profile</h2>
     Welcome {{ unique_user.username }} to your FootySquadPro Profile.<br/>
-    <form method="post" action="/userProfile">
       <p>Username: {{ unique_user.username }}<br/>
       Email: {{ unique_user.email }}<br/>
       Name: {{ unique_user.name }}<br/>
@@ -17,11 +16,10 @@
       <a href="/scoring?username={{ unique_user.username }}">Scoring System</a>
       <a href="/rules?username={{ unique_user.username }}">Game Rules</a>
       <a href="/playerStats?username={{ unique_user.username }}">Player Statistics</a></p>
-    </form>
     <h3>Squads</h3>
     Every user can have only one squad to bet on FantasySquadPro. Build your squad and enjoy.<br/><br/>
-    <form>
-      <input type="submit" value="Build New Squad" name="button"/>
+    <form method="post" action="/userProfile">
+      <input type="submit" value="Build Squad" name="button"/>
     </form>
   </body>
 </html>

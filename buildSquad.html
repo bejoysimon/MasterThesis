@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Build Squad</title>
+  </head>
+  <body>
+    <form method="get" action="/">
+      <input type="submit" value="Logout" name="button"/>
+    </form>
+    <a href="/userProfile?username={{ unique_user.username }}">Back to my profile.</a>
+    <h2>Build Squad</h2>
+    Welcome {{ unique_user.username }} to your FootySquadPro Squad Building page.<br/><br/>
+    <form method="post" action="/buildSquad">
+      Available budget: 500M <br/>
+      Cost so far: {{ squad.squad_cost }}<br/><br/>
+      Choose players for the squad by their position below.<br/>
+      <p>Squad Name: <input type="text" name="squad_name"></p>
+      Goalkeeper 1 :
+      <select name="gkp1">
+        {% for i in gkp %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Goalkeeper 2 :
+      <select name="gkp2">
+        {% for i in gkp %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select><br/>
+      Defender 1 :
+      <select name="def1">
+        {% for i in def %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Defender 2 :
+      <select name="def2">
+        {% for i in def %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Defender 3 :
+      <select name="def3">
+        {% for i in def %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Defender 4 :
+      <select name="def4">
+        {% for i in def %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Defender 5 :
+      <select name="def5">
+        {% for i in def %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select><br/>
+      Midfielder 1 :
+      <select name="mid1">
+        {% for i in mid %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Midfielder 2 :
+      <select name="mid2">
+        {% for i in mid %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Midfielder 3 :
+      <select name="mid3">
+        {% for i in mid %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Midfielder 4 :
+      <select name="mid4">
+        {% for i in mid %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Midfielder 5 :
+      <select name="mid5">
+        {% for i in mid %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select><br/>
+      Forward 1 :
+      <select name="fwd1">
+        {% for i in fwd %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Forward 2 :
+      <select name="fwd2">
+        {% for i in fwd %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+      Forward 3 :
+      <select name="fwd3">
+        {% for i in fwd %}
+        <option>{{ i.name }}</option>
+        {% endfor %}
+      </select>
+
+      <br/><br/>
+      <input type="submit" value="Submit" name="button"/>
+    </form>
+  </body>
+</html>

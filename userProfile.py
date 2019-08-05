@@ -41,8 +41,11 @@ class UserProfile(webapp2.RequestHandler):
         action = self.request.get('button')
 
         if action == "Logout":
-            self.redirect("/")
-            
+            self.redirect('/')
+
+        if action == "Build Squad":
+            self.redirect('/buildSquad?username='+unique_user.username)
+
 
         template_values = {'unique_user' : unique_user}
 

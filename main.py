@@ -6,6 +6,7 @@ import os
 import csv
 
 from myuser import MyUser
+from mySquad import MySquad
 from userModel import UserModel
 from userSignUp import UserSignUp
 from userProfile import UserProfile
@@ -14,6 +15,7 @@ from scoring import Scoring
 from rules import Rules
 from playerStats import PlayerStats
 from playerProfile import PlayerProfile
+from buildSquad import BuildSquad
 from adminPage import AdminPage
 from addPlayersData import AddPlayersData
 from blobCollection import BlobCollection
@@ -93,4 +95,5 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                 ('/playerProfile', PlayerProfile),
                                 ('/adminPage', AdminPage),
                                 ('/addPlayersData', AddPlayersData),
+                                ('/buildSquad', BuildSquad),
                                 ('/upload', UploadHandler)], debug=True)
