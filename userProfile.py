@@ -23,7 +23,10 @@ class UserProfile(webapp2.RequestHandler):
         unique_key = ndb.Key('UserModel', username)
         unique_user = unique_key.get()
 
-        template_values = {'unique_user' : unique_user}
+        squad_key = ndb.Key('MySquad', username)
+        squad = squad_key.get()
+
+        template_values = {'unique_user' : unique_user, 'squad' : squad}
 
         template = JINJA_ENVIRONMENT.get_template('userProfile.html')
         self.response.write(template.render(template_values))
@@ -44,6 +47,9 @@ class UserProfile(webapp2.RequestHandler):
             self.redirect('/')
 
         if action == "Build Squad":
+            self.redirect('/buildSquad?username='+unique_user.username)
+
+        if action == "Edit Squad":
             self.redirect('/buildSquad?username='+unique_user.username)
 
 

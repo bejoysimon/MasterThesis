@@ -19,7 +19,12 @@
     <h3>Squads</h3>
     Every user can have only one squad to bet on FantasySquadPro. Build your squad and enjoy.<br/><br/>
     <form method="post" action="/userProfile">
+      {% if squad %}
+      My Squad : {{ squad.squad_name }}
+      <input type="submit" value="Edit Squad" name="button"/>
+      {% else %}
       <input type="submit" value="Build Squad" name="button"/>
+      {% endif %}
     </form>
   </body>
 </html>

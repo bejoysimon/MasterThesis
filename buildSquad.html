@@ -11,101 +11,121 @@
     <h2>Build Squad</h2>
     Welcome {{ unique_user.username }} to your FootySquadPro Squad Building page.<br/><br/>
     <form method="post" action="/buildSquad">
-      Available budget: 500M <br/>
+      Available budget: 1000 <br/>
+      {% if squad %}
       Cost so far: {{ squad.squad_cost }}<br/><br/>
+      {% else %}
+      Cost so far: 0<br/><br/>
+      {% endif %}
       Choose players for the squad by their position below.<br/>
-      <p>Squad Name: <input type="text" name="squad_name"></p>
-      Goalkeeper 1 :
-      <select name="gkp1">
-        {% for i in gkp %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Goalkeeper 2 :
-      <select name="gkp2">
-        {% for i in gkp %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select><br/>
-      Defender 1 :
-      <select name="def1">
-        {% for i in def %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Defender 2 :
-      <select name="def2">
-        {% for i in def %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Defender 3 :
-      <select name="def3">
-        {% for i in def %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Defender 4 :
-      <select name="def4">
-        {% for i in def %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Defender 5 :
-      <select name="def5">
-        {% for i in def %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select><br/>
-      Midfielder 1 :
-      <select name="mid1">
-        {% for i in mid %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Midfielder 2 :
-      <select name="mid2">
-        {% for i in mid %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Midfielder 3 :
-      <select name="mid3">
-        {% for i in mid %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Midfielder 4 :
-      <select name="mid4">
-        {% for i in mid %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Midfielder 5 :
-      <select name="mid5">
-        {% for i in mid %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select><br/>
-      Forward 1 :
-      <select name="fwd1">
-        {% for i in fwd %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Forward 2 :
-      <select name="fwd2">
-        {% for i in fwd %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-      Forward 3 :
-      <select name="fwd3">
-        {% for i in fwd %}
-        <option>{{ i.name }}</option>
-        {% endfor %}
-      </select>
-
+      <p>Squad Name: <input type="text" name="squad_name" value="{{ squad.squad_name }}" required></p>
+      <div class="">
+        Goalkeeper 1 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ gkp }}" name="gkp1" value="{{ squad.gkp1 }}" required>
+        <datalist id="{{ gkp }}">
+          {% for i in gkp %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Goalkeeper 2 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ gkp }}" name="gkp2" value="{{ squad.gkp2 }}" required>
+        <datalist id="{{ gkp }}">
+          {% for i in gkp %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist><br/>
+        Defender 1 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ def }}" name="def1" value="{{ squad.def1 }}" required>
+        <datalist id="{{ def }}">
+          {% for i in def %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Defender 2 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ def }}" name="def2" value="{{ squad.def2 }}" required>
+        <datalist id="{{ def }}">
+          {% for i in def %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Defender 3 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ def }}" name="def3" value="{{ squad.def3 }}" required>
+        <datalist id="{{ def }}">
+          {% for i in def %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Defender 4 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ def }}" name="def4" value="{{ squad.def4 }}" required>
+        <datalist id="{{ def }}">
+          {% for i in def %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Defender 5 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ def }}" name="def5" value="{{ squad.def5 }}" required>
+        <datalist id="{{ def }}">
+          {% for i in def %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist><br/>
+        Midfielder 1 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ mid }}" name="mid1" value="{{ squad.mid1 }}" required>
+        <datalist id="{{ mid }}">
+          {% for i in mid %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Midfielder 2 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ mid }}" name="mid2" value="{{ squad.mid2 }}" required>
+        <datalist id="{{ mid }}">
+          {% for i in mid %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Midfielder 3 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ mid }}" name="mid3" value="{{ squad.mid3 }}" required>
+        <datalist id="{{ mid }}">
+          {% for i in mid %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Midfielder 4 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ mid }}" name="mid4" value="{{ squad.mid4 }}" required>
+        <datalist id="{{ mid }}">
+          {% for i in mid %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Midfielder 5 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ mid }}" name="mid5" value="{{ squad.mid5 }}" required>
+        <datalist id="{{ mid }}">
+          {% for i in mid %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist><br/>
+        Forward 1 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ fwd }}" name="fwd1" value="{{ squad.fwd1 }}" required>
+        <datalist id="{{ fwd }}">
+          {% for i in fwd %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Forward 2 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ fwd }}" name="fwd2" value="{{ squad.fwd2 }}" required>
+        <datalist id="{{ fwd }}">
+          {% for i in fwd %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+        Forward 3 : <img src="{{ img }}" alt="player pic" width="50"/>
+        <input list="{{ fwd }}" name="fwd3" value="{{ squad.fwd3 }}" required>
+        <datalist id="{{ fwd }}">
+          {% for i in fwd %}
+          <option>{{ i.name }}</option>
+          {% endfor %}
+        </datalist>
+      </div>
       <br/><br/>
       <input type="submit" value="Submit" name="button"/>
     </form>

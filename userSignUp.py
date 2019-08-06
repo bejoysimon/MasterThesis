@@ -48,7 +48,7 @@ class UserSignUp(webapp2.RequestHandler):
             actual_username = myuser.username
 
             if username != actual_username:
-                self.response.write('Incorrect Username!')
+                self.response.write('***Incorrect Username!***')
 
             else:
                 self.redirect('/userProfile?username='+username)
@@ -80,7 +80,7 @@ class UserSignUp(webapp2.RequestHandler):
 
                     self.redirect('/userProfile?username='+username)
             else:
-                self.response.write('Username Exists. Please choose another!')
+                self.response.write('***Username Exists. Please choose another!***')
 
 
         template_values = {
