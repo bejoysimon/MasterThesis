@@ -52,6 +52,9 @@ class UserProfile(webapp2.RequestHandler):
         if action == "Edit Squad":
             self.redirect('/buildSquad?username='+unique_user.username)
 
+        if action == "Place Bets":
+            self.redirect('/betting?username='+unique_user.username)
+
 
         template_values = {'unique_user' : unique_user}
 

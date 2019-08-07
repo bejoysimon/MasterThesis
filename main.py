@@ -16,6 +16,7 @@ from rules import Rules
 from playerStats import PlayerStats
 from playerProfile import PlayerProfile
 from buildSquad import BuildSquad
+from betting import Betting
 from adminPage import AdminPage
 from addPlayersData import AddPlayersData
 from blobCollection import BlobCollection
@@ -96,4 +97,5 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                 ('/adminPage', AdminPage),
                                 ('/addPlayersData', AddPlayersData),
                                 ('/buildSquad', BuildSquad),
+                                ('/betting', Betting),
                                 ('/upload', UploadHandler)], debug=True)

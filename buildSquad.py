@@ -147,7 +147,10 @@ class BuildSquad(webapp2.RequestHandler):
 
             total_cost = cost_gkp1 + cost_gkp2 + cost_def1 + cost_def2 + cost_def3 + cost_def4 + cost_def5 + cost_mid1 + cost_mid2 + cost_mid3 + cost_mid4 + cost_mid5 + cost_fwd1 + cost_fwd2 + cost_fwd3
 
-            if gkp1 != gkp2 or def1 != def2 or def2 != def3 or def3 != def4 or def4 != def5 or mid1 != mid2 or mid2 != mid3 or mid3 != mid4 or mid4 != mid5 or fwd1 != fwd2 != fwd3:
+            if (gkp1 != gkp2 and
+                def1 != def2 and def1 != def3 and def1 != def4 and def1 != def5 and def2 != def3 and def2 != def4 and def2 != def5 and def3 != def4 and def3 != def5 and def4 != def5 and
+                mid1 != mid2 and mid1 != mid3 and mid1 != mid4 and mid1 != mid5 and mid2 != mid3 and mid2 != mid4 and mid2 != mid5 and mid3 != mid4 and mid3 != mid5 and mid4 != mid5 and
+                fwd1 != fwd2 and fwd2 != fwd3 and fwd1 != fwd3):
                 if total_cost <= 1000:
                     squad_update = MySquad(id = myuser.username,
                                             username = myuser.username,
