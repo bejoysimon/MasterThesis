@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Betting</title>
+  </head>
+  <body>
+    <form method="get" action="/">
+      <input type="submit" value="Logout" name="button"/>
+    </form>
+    <a href="/userProfile?username={{ unique_user.username }}">Back to my profile.</a>
+    <h2>Betting</h2>
+    Welcome {{ unique_user.username }} to your FootySquadPro Betting page.<br/>
+      <p>Username: {{ unique_user.username }}<br/>
+      Email: {{ unique_user.email }}<br/>
+      Name: {{ unique_user.name }}<br/>
+      Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}">Manage</a><br/><br/></p>
+    <h3>Popular Markets</h3>
+    <form method="post" action="/betting">
+      <table>
+        <tr><th>Market</th><th>So Far</th><th>Action</th></tr>
+        <tr>
+          <td>Total Goals</td><td>{{ squad.squad_cost }}</td>
+          <td><input type="text" name="total_goals_sell" value="" placeholder="0.00" readonly><input type="text" name="total_goals_buy" value="" placeholder="0.00" readonly>
+            <input type="submit" value="SELL" name="button"/><input type="submit" value="BUY" name="button"/></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
