@@ -22,4 +22,6 @@ class MySquad(ndb.Model):
     fwd1 = ndb.StringProperty()
     fwd2 = ndb.StringProperty()
     fwd3 = ndb.StringProperty()
+    captain = ndb.StringProperty()
+    vice_captain = ndb.StringProperty()
     # queriedGPUs = ndb.StructuredProperty(GPUInfo, repeated=True)

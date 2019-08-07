@@ -145,6 +145,9 @@ class BuildSquad(webapp2.RequestHandler):
             player = player_key.get()
             cost_fwd3 = player.cost
 
+            captain = self.request.get('captain')
+            vice_captain = self.request.get('vice_captain')
+
             total_cost = cost_gkp1 + cost_gkp2 + cost_def1 + cost_def2 + cost_def3 + cost_def4 + cost_def5 + cost_mid1 + cost_mid2 + cost_mid3 + cost_mid4 + cost_mid5 + cost_fwd1 + cost_fwd2 + cost_fwd3
 
             if (gkp1 != gkp2 and
@@ -170,7 +173,9 @@ class BuildSquad(webapp2.RequestHandler):
                                             mid5 = mid5,
                                             fwd1 = fwd1,
                                             fwd2 = fwd2,
-                                            fwd3 = fwd3)
+                                            fwd3 = fwd3,
+                                            captain = captain,
+                                            vice_captain = vice_captain)
                     squad_update.put()
 
                     self.redirect('/userProfile?username='+myuser.username)
