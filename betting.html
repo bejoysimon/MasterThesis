@@ -15,15 +15,50 @@
       Name: {{ unique_user.name }}<br/>
       Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}">Manage</a><br/><br/></p>
     <h3>Popular Markets</h3>
-    <form method="post" action="/betting">
-      <table>
-        <tr><th>Market</th><th>So Far</th><th>Action</th></tr>
-        <tr>
-          <td>Total Goals</td><td>{{ squad.squad_cost }}</td>
-          <td><input type="text" name="total_goals_sell" value="" placeholder="0.00" readonly><input type="text" name="total_goals_buy" value="" placeholder="0.00" readonly>
+    <table>
+      <tr><th>Market</th><th>So Far</th><th>Action</th></tr>
+      <tr>
+        <form method="post" action="/betting">
+          <td>Total Goals Scored</td><td>{{ squad.squad_cost }}</td>
+          <td><input type="text" name="market_sell" value="" placeholder="0.00" readonly><input type="text" name="total_goals_buy" value="" placeholder="0.00" readonly>
             <input type="submit" value="SELL" name="button"/><input type="submit" value="BUY" name="button"/></td>
-        </tr>
-      </table>
-    </form>
+        </form>
+      </tr>
+      <tr>
+        <form method="post" action="/betting">
+          <td>Total Bookings</td><td>{{ squad.squad_cost }}</td>
+          <td><input type="text" name="total_bookings_sell" value="" placeholder="0.00" readonly><input type="text" name="total_bookings_buy" value="" placeholder="0.00" readonly>
+            <input type="submit" value="SELL" name="button"/><input type="submit" value="BUY" name="button"/></td>
+        </form>
+      </tr>
+      <tr>
+        <form method="post" action="/betting">
+          <td>Captain Points</td><td>{{ squad.squad_cost }}</td>
+          <td><input type="text" name="captain_points_sell" value="" placeholder="0.00" readonly><input type="text" name="captain_points_buy" value="" placeholder="0.00" readonly>
+            <input type="submit" value="SELL" name="button"/><input type="submit" value="BUY" name="button"/></td>
+        </form>
+      </tr>
+      <tr>
+        <form method="post" action="/betting">
+          <td>Total Goal Minutes</td><td>{{ squad.squad_cost }}</td>
+          <td><input type="text" name="goal_minutes_sell" value="" placeholder="0.00" readonly><input type="text" name="goal_minutes_buy" value="" placeholder="0.00" readonly>
+            <input type="submit" value="SELL" name="button"/><input type="submit" value="BUY" name="button"/></td>
+        </form>
+      </tr>
+      <tr>
+        <form method="post" action="/betting">
+          <td>Squad Points Achieved</td><td>{{ squad.squad_cost }}</td>
+          <td><input type="text" name="squad_points_sell" value="" placeholder="0.00" readonly><input type="text" name="squad_points_buy" value="" placeholder="0.00" readonly>
+            <input type="submit" value="SELL" name="button"/><input type="submit" value="BUY" name="button"/></td>
+        </form>
+      </tr>
+    </table>
+    <h3>Bet Summary</h3>
+    <p>A list of bets placed by {{ unique_user.username }} is shown below.</p>
+    {% if bet %}
+      {% for i in bet %}
+      {loop.index}. {{i}}
+      {% endfor %}
+    {% endif %}
   </body>
 </html>

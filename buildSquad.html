@@ -128,47 +128,51 @@
           <option>{{ i.name }}</option>
           {% endfor %}
         </datalist><br/>
-        <h3>Captain</h3>
-        <input list="{{ squad }}" name="captain" value="{{ squad.captain }}" required>
-        <datalist id="{{ squad }}">
-          <option>{{ squad.gkp1 }}</option>
-          <option>{{ squad.gkp2 }}</option>
-          <option>{{ squad.def1 }}</option>
-          <option>{{ squad.def2 }}</option>
-          <option>{{ squad.def3 }}</option>
-          <option>{{ squad.def4 }}</option>
-          <option>{{ squad.def5 }}</option>
-          <option>{{ squad.mid1 }}</option>
-          <option>{{ squad.mid2 }}</option>
-          <option>{{ squad.mid3 }}</option>
-          <option>{{ squad.mid4 }}</option>
-          <option>{{ squad.mid5 }}</option>
-          <option>{{ squad.fwd1 }}</option>
-          <option>{{ squad.fwd2 }}</option>
-          <option>{{ squad.fwd3 }}</option>
-        </datalist><br/>
-        <h3>Vice-Captain</h3>
-        <input list="{{ squad }}" name="vice_captain" value="{{ squad.vice_captain }}" required>
-        <datalist id="{{ squad }}">
-          <option>{{ squad.gkp1 }}</option>
-          <option>{{ squad.gkp2 }}</option>
-          <option>{{ squad.def1 }}</option>
-          <option>{{ squad.def2 }}</option>
-          <option>{{ squad.def3 }}</option>
-          <option>{{ squad.def4 }}</option>
-          <option>{{ squad.def5 }}</option>
-          <option>{{ squad.mid1 }}</option>
-          <option>{{ squad.mid2 }}</option>
-          <option>{{ squad.mid3 }}</option>
-          <option>{{ squad.mid4 }}</option>
-          <option>{{ squad.mid5 }}</option>
-          <option>{{ squad.fwd1 }}</option>
-          <option>{{ squad.fwd2 }}</option>
-          <option>{{ squad.fwd3 }}</option>
-        </datalist><br/>
       </div>
       <br/><br/>
       <input type="submit" value="Submit" name="button"/>
     </form>
+    <!-- <form method="post" action="/buildSquad">
+      Don't forget to set your special players.
+      <h3>Captain</h3>
+      <input list="{{ squad }}" name="captain" value="{{ squad.captain }}" required>
+      <datalist id="{{ squad }}">
+        <option>{{ squad.gkp1 }}</option>
+        <option>{{ squad.gkp2 }}</option>
+        <option>{{ squad.def1 }}</option>
+        <option>{{ squad.def2 }}</option>
+        <option>{{ squad.def3 }}</option>
+        <option>{{ squad.def4 }}</option>
+        <option>{{ squad.def5 }}</option>
+        <option>{{ squad.mid1 }}</option>
+        <option>{{ squad.mid2 }}</option>
+        <option>{{ squad.mid3 }}</option>
+        <option>{{ squad.mid4 }}</option>
+        <option>{{ squad.mid5 }}</option>
+        <option>{{ squad.fwd1 }}</option>
+        <option>{{ squad.fwd2 }}</option>
+        <option>{{ squad.fwd3 }}</option>
+      </datalist><br/>
+      <h3>Vice-Captain</h3>
+      <input list="{{ squad }}" name="vice_captain" value="{{ squad.vice_captain }}" required>
+      <datalist id="{{ squad }}">
+        <option>{{ squad.gkp1 }}</option>
+        <option>{{ squad.gkp2 }}</option>
+        <option>{{ squad.def1 }}</option>
+        <option>{{ squad.def2 }}</option>
+        <option>{{ squad.def3 }}</option>
+        <option>{{ squad.def4 }}</option>
+        <option>{{ squad.def5 }}</option>
+        <option>{{ squad.mid1 }}</option>
+        <option>{{ squad.mid2 }}</option>
+        <option>{{ squad.mid3 }}</option>
+        <option>{{ squad.mid4 }}</option>
+        <option>{{ squad.mid5 }}</option>
+        <option>{{ squad.fwd1 }}</option>
+        <option>{{ squad.fwd2 }}</option>
+        <option>{{ squad.fwd3 }}</option>
+      </datalist><br/><br/>
+      <input type="submit" value="Set" name="button"/>
+    </form> -->
   </body>
 </html>

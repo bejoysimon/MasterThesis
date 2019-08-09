@@ -6,6 +6,8 @@ import os
 
 from myuser import MyUser
 from userModel import UserModel
+from mySquad import MySquad
+from bettingMarkets import BettingMarkets
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -26,7 +28,11 @@ class AdminPage(webapp2.RequestHandler):
         admin_key = ndb.Key('UserModel', myuser.username)
         admin_user = admin_key.get()
 
-        template_values = {'admin_user' : admin_user}
+        # squad_key = ndb.Key('MySquad', myuser.username)
+        # squad = squad_key.get()
+        squad = MySquad.query()
+
+        template_values = {'admin_user' : admin_user, 'squad' : squad}
 
         template = JINJA_ENVIRONMENT.get_template('adminPage.html')
         self.response.write(template.render(template_values))
@@ -39,15 +45,13 @@ class AdminPage(webapp2.RequestHandler):
         if action == "Home":
             self.redirect('/')
 
-        user = users.get_current_user()
+        if action == "Add":
+            market_id = int(self.request.get("market_id"))
+            market_name = self.request.get("market_name")
 
-        myuser_key = ndb.Key('MyUser', user.user_id())
-        myuser = myuser_key.get()
+            add_market = BettingMarkets(id = myuser.username + market_id,
+                                        market_id = market_id,
+                                        market_name = market_name)
+            add_market.put()
 
-        unique_key = ndb.Key('UserModel', myuser.username)
-        unique_user = unique_key.get()
-
-        template_values = {'unique_user' : unique_user}
-
-        template = JINJA_ENVIRONMENT.get_template('adminPage.html')
-        self.response.write(template.render(template_values))
+            self.redirect('/adminPage')

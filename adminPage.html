@@ -4,13 +4,26 @@
     <title>Admin Page</title>
   </head>
   <body>
-    <form method="post" action="/adminPage">
-      <p>Welcome Admin to your FootySquadPro Admin Page. </p>
-      Total Users: <br/>
-      <p>Import Player's Data from <a href="/addPlayersData">here.</a><br/></p>
-    </form>
     <form method="get" action="/">
       <input type="submit" value="Home" name="button"/>
+    </form>
+    <form method="post" action="/adminPage">
+      <h2>Admin Page</h2>
+      <p>Welcome Admin to your FootySquadPro Admin Page. </p>
+      Total Users: <br/><br/>
+      <h3>Import Data</h3>
+      <p>Import Player's Data from <a href="/addPlayersData">here.</a><br/></p>
+    </form>
+    <br/>
+    <form method="post" action="/adminPage">
+      <h3>Add Betting Markets</h3>
+      <p>Select a squad to add it's betting markets</p>
+      {% for i in squad %}
+        <a href="#">{{ i.squad_name }}</a><br/>
+      {% endfor %}
+      <input type="text" name="market_id" value="" placeholder="Market ID" required>
+      <input type="text" name="market_name" value="" placeholder="Market Description" required>
+      <input type="submit" value="Add" name="button"/>
     </form>
   </body>
 </html>

@@ -17,6 +17,8 @@ from playerStats import PlayerStats
 from playerProfile import PlayerProfile
 from buildSquad import BuildSquad
 from betting import Betting
+from bettingMarkets import BettingMarkets
+from myBets import MyBets
 from adminPage import AdminPage
 from addPlayersData import AddPlayersData
 from blobCollection import BlobCollection
