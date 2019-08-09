@@ -19,7 +19,7 @@
       <h3>Add Betting Markets</h3>
       <p>Select a squad to add it's betting markets</p>
       {% for i in squad %}
-        <a href="#">{{ i.squad_name }}</a><br/>
+        {{ i.username }} --> <a href="#">{{ i.squad_name }}</a><br/>
       {% endfor %}
       <input type="text" name="market_id" value="" placeholder="Market ID" required>
       <input type="text" name="market_name" value="" placeholder="Market Description" required>
