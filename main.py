@@ -20,6 +20,8 @@ from betting import Betting
 from bettingMarkets import BettingMarkets
 from myBets import MyBets
 from adminPage import AdminPage
+from addMarkets import AddMarkets
+from updateMarkets import UpdateMarkets
 from addPlayersData import AddPlayersData
 from blobCollection import BlobCollection
 from uploadHandler import UploadHandler
@@ -97,6 +99,8 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                 ('/playerStats', PlayerStats),
                                 ('/playerProfile', PlayerProfile),
                                 ('/adminPage', AdminPage),
+                                ('/addMarkets', AddMarkets),
+                                ('/updateMarkets', UpdateMarkets),
                                 ('/addPlayersData', AddPlayersData),
                                 ('/buildSquad', BuildSquad),
                                 ('/betting', Betting),

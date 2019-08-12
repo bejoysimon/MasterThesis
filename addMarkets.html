@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Add Markets</title>
+  </head>
+  <body>
+    <form method="get" action="/">
+      <input type="submit" value="Home" name="button"/>
+    </form>
+    <a href="/adminPage">Back to Admin Page</a>
+    <form method="post" action="/addMarkets">
+      <h3>Add Betting Markets</h3>
+      <p>Add betting markets for {{ unique_user.username }}<br/><br/>
+      Username: {{ unique_user.username }}<br/>
+      Email: {{ unique_user.email }}<br/>
+      Name: {{ unique_user.name }}<br/>
+      Account Balance: {{ unique_user.balance }}  <br/><br/></p>
+      <input type="text" name="username" value="{{ unique_user.username }}" readonly>
+      <input type="text" name="squad_name" value="{{ squad.squad_name }}" readonly>
+      <input type="text" name="market_name" value="" placeholder="Market Name" required>
+      <input type="text" name="market_so_far" value="" placeholder="Market So Far" required>
+      <input type="text" name="market_sell_price" value="" placeholder="Market Sell Price" required>
+      <input type="text" name="market_buy_price" value="" placeholder="Market Buy Price" required>
+      <input type="submit" value="Add" name="button"/><br/><br/>
+      {% if market.count()>0 %}
+      <h3>Available Markets</h3>
+      {% for i in market %}
+      {{ loop.index }}. {{ i.market_name }}<br/>
+      {% endfor %}
+      {% endif %}
+      <br/>
+      <a href="/updateMarkets?username={{ unique_user.username }}">Update Markets</a>
+    </form>
+  </body>
+</html>

@@ -15,10 +15,10 @@
     </div>
     <form method="post" action="/playerStats">
       View player statistics by their playing position. Choose a position below:<br/>
-      <p><input type="radio" name="position" value="GKP">Goalkeepers
-      <input type="radio" name="position" value="DEF">Defenders
-      <input type="radio" name="position" value="MID">Midfielders
-      <input type="radio" name="position" value="FWD">Forwards</p>
+      <p><input type="radio" name="position" value="GKP" required>Goalkeepers
+      <input type="radio" name="position" value="DEF" required>Defenders
+      <input type="radio" name="position" value="MID" required>Midfielders
+      <input type="radio" name="position" value="FWD" required>Forwards</p>
       <input type="submit" value="View" name="button"/><br/><br/>
     </form>
     {% if result %}

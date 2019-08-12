@@ -4,6 +4,11 @@
     <meta charset="utf-8"/>
   </head>
   <body>
+    <form method="get" action="/">
+      <input type="submit" value="Home" name="button"/>
+    </form>
+    <a href="/adminPage">Back to Admin Page</a><br/><br/>
+    <h3>Import Data</h3>
     Import Player's data to datastore from a file<br/><br/>
     <!-- form for uploading a file to the blobstore -->
     <form action="{{ upload_url }}" method="post" enctype="multipart/form-data">
@@ -15,8 +20,5 @@
     {% for i in collection.filenames %}
     {{ i }}
     {% endfor %}
-    <form method="get" action="/">
-    <input type="submit" value="Home" name="button"/>
-    </form>
   </body>
 </html>

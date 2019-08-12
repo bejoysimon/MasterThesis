@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Update Markets</title>
+  </head>
+  <body>
+    <form method="get" action="/">
+      <input type="submit" value="Home" name="button"/>
+    </form>
+    <a href="/adminPage">Back to Admin Page</a>
+    <h3>Update Betting Markets</h3>
+    <p>Update betting markets for {{ unique_user.username }}<br/><br/>
+    Username: {{ unique_user.username }}<br/>
+    Email: {{ unique_user.email }}<br/>
+    Name: {{ unique_user.name }}<br/>
+    Account Balance: {{ unique_user.balance }}  <br/><br/></p>
+    {% for i in market %}
+    <form method="post" action="/updateMarkets">
+    <input type="text" name="username" value="{{ unique_user.username }}" readonly>
+    <input type="text" name="squad_name" value="{{ squad.squad_name }}" readonly>
+    <input type="text" name="updated_name" value="{{ i.market_name }}" required>
+    <input type="text" name="updated_so_far" value="{{ i.market_so_far }}" required>
+    <input type="text" name="updated_sell_price" value="{{ i.market_sell_price }}" required>
+    <input type="text" name="updated_buy_price" value="{{ i.market_buy_price }}" required>
+    <input type="submit" value="Update" name="button"/><br/>
+    </form>
+    {% endfor %}
+  </body>
+</html>
