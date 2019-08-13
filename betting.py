@@ -29,8 +29,7 @@ class Betting(webapp2.RequestHandler):
         squad_key = ndb.Key('MySquad', username)
         squad = squad_key.get()
 
-        market_key = ndb.Key('BettingMarkets', username)
-        market = market_key.get()
+        market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 
         bet_key = ndb.Key('MyBets', username)
         bet = bet_key.get()
@@ -55,18 +54,7 @@ class Betting(webapp2.RequestHandler):
 
         bet_key = ndb.Key('MyBets', myuser.username)
         bet = bet_key.get()
-
-        # total_goals_sell = self.request.get('total_goals_sell')
-        # total_goals_buy = self.request.get('total_goals_buy')
-        # total_bookings_sell = self.request.get('total_bookings_sell')
-        # total_bookings_buy = self.request.get('total_bookings_buy')
-        # captain_points_sell = self.request.get('captain_points_sell')
-        # captain_points_buy = self.request.get('captain_points_buy')
-        # goal_minutes_sell = self.request.get('goal_minutes_sell')
-        # goal_minutes_buy = self.request.get('goal_minutes_buy')
-        # squad_points_sell = self.request.get('squad_points_sell')
-        # squad_points_buy = self.request.get('squad_points_buy')
-
+        
 
         action = self.request.get('button')
 

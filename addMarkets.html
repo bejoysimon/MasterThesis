@@ -9,12 +9,33 @@
     </form>
     <a href="/adminPage">Back to Admin Page</a>
     <form method="post" action="/addMarkets">
-      <h3>Add Betting Markets</h3>
-      <p>Add betting markets for {{ unique_user.username }}<br/><br/>
-      Username: {{ unique_user.username }}<br/>
+      <h3>Squad Details</h3>
+      <p>Username: {{ unique_user.username }}<br/>
       Email: {{ unique_user.email }}<br/>
       Name: {{ unique_user.name }}<br/>
-      Account Balance: {{ unique_user.balance }}  <br/><br/></p>
+      Account Balance: {{ unique_user.balance }}<br/><br/></p>
+      <div class="">
+        <h4>Line-Up for {{ squad.squad_name }}</h4>
+        <h4>Starting Eleven</h4>
+          {{ squad.gkp1 }}(GK)<br/>
+          {{ squad.def1 }}<br/>
+          {{ squad.def2 }}<br/>
+          {{ squad.def3 }}<br/>
+          {{ squad.def4 }}<br/>
+          {{ squad.mid1 }}<br/>
+          {{ squad.mid2 }}<br/>
+          {{ squad.mid3 }}<br/>
+          {{ squad.mid4 }}<br/>
+          {{ squad.fwd1 }}<br/>
+          {{ squad.fwd2 }}<br/>
+        <h4>Substitutes</h4>
+          {{ squad.gkp2 }}(GK)<br/>
+          {{ squad.def5 }}<br/>
+          {{ squad.mid5 }}<br/>
+          {{ squad.fwd3 }}<br/>
+      </div><br/> 
+      <h3>Add Betting Markets</h3>
+      Add betting markets for {{ unique_user.username }}<br/><br/>
       <input type="text" name="username" value="{{ unique_user.username }}" readonly>
       <input type="text" name="squad_name" value="{{ squad.squad_name }}" readonly>
       <input type="text" name="market_name" value="" placeholder="Market Name" required>
