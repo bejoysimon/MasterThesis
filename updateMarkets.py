@@ -8,6 +8,7 @@ from myuser import MyUser
 from userModel import UserModel
 from mySquad import MySquad
 from bettingMarkets import BettingMarkets
+from myBets import MyBets
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -48,6 +49,7 @@ class UpdateMarkets(webapp2.RequestHandler):
         updated_so_far = int(self.request.get('updated_so_far'))
         updated_sell_price = float(self.request.get('updated_sell_price'))
         updated_buy_price = float(self.request.get('updated_buy_price'))
+        market_settlement = int(self.request.get('market_settlement'))
 
         unique_user_key = ndb.Key('UserModel', username)
         unique_user = unique_user_key.get()
@@ -70,6 +72,15 @@ class UpdateMarkets(webapp2.RequestHandler):
             market.market_so_far = updated_so_far
             market.market_sell_price = updated_sell_price
             market.market_buy_price = updated_buy_price
+            market.market_settlement = market_settlement
             market.put()
+
+            bet = MyBets.query(MyBets.username == username and MyBets.bet_market == updated_name)
+
+            if bet.count()>0:
+                for i in bet:
+                    i.bet_settlement = market_settlement
+                    i.put()
+
 
             self.redirect('/updateMarkets?username='+username)

@@ -13,26 +13,40 @@
       <p>Username: {{ unique_user.username }}<br/>
       Email: {{ unique_user.email }}<br/>
       Name: {{ unique_user.name }}<br/>
+      Squad Name: {{ squad.squad_name }}<br/>
       Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}">Manage</a><br/><br/></p>
     <h3>Available Markets</h3>
     <table>
-      <tr><th>Market</th><th>So Far</th><th>Action</th></tr>
+      <tr><th>Market</th><th>So Far</th><th>Bet Stake</th><th>Action</th></tr>
       {% for i in market %}
+      {% if i.market_settlement == None %}
       <form method="post" action="/betting">
         <tr><td><input type="text" name="market_name" value="{{ i.market_name }}" readonly></td>
             <td><input type="text" name="market_so_far" value="{{ i.market_so_far }}" readonly></td>
-            <td><input type="text" name="market_sell" value="{{ i.market_sell_price }}" readonly>
-                <input type="text" name="total_goals_buy" value="{{ i.market_buy_price }}" readonly>
+            <td><input type="text" name="bet_stake" value="" required></td>
+            <td><input type="text" name="market_sell_price" value="{{ i.market_sell_price }}" readonly>
+                <input type="text" name="market_buy_price" value="{{ i.market_buy_price }}" readonly>
                 <input type="submit" value="SELL" name="button"/><input type="submit" value="BUY" name="button"/></td></tr>
       </form>
+      {% else %}
+      <form method="post" action="/betting">
+        <tr><td><input type="text" name="market_name" value="{{ i.market_name }}" disabled></td>
+            <td><input type="text" name="market_so_far" value="Settled" disabled></td>
+            <td><input type="text" name="bet_stake" value="Settled" disabled></td>
+            <td><input type="text" name="market_sell_price" value="Settled" disabled>
+                <input type="text" name="market_buy_price" value="Settled" disabled>
+                <input type="text" name="market_settlement" value="{{ i.market_settlement }}" disabled></td></tr>
+      </form>
+      {% endif %}
       {% endfor %}
     </table>
+    {% if bet.count()>0 %}
     <h3>Bet Summary</h3>
     <p>A list of bets placed by {{ unique_user.username }} is shown below.</p>
-    {% if bet %}
       {% for i in bet %}
-      {loop.index}. {{i}}
+      {{loop.index}}. €{{ i.bet_stake }} {{ i.bet_action }} of {{ i.bet_market }} @{{ i.bet_price }}.<br/>
       {% endfor %}
+      <br/><a href="/betResults?username={{ unique_user.username }}">Bet Results</a>
     {% endif %}
   </body>
 </html>

@@ -6,6 +6,9 @@ import os
 
 from myuser import MyUser
 from userModel import UserModel
+from mySquad import MySquad
+from bettingMarkets import BettingMarkets
+from myBets import MyBets
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -14,7 +17,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True
 )
 
-class UserProfile(webapp2.RequestHandler):
+class BetResults(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
 
@@ -26,9 +29,13 @@ class UserProfile(webapp2.RequestHandler):
         squad_key = ndb.Key('MySquad', username)
         squad = squad_key.get()
 
-        template_values = {'unique_user' : unique_user, 'squad' : squad}
+        # market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 
-        template = JINJA_ENVIRONMENT.get_template('userProfile.html')
+        bet = MyBets.query(MyBets.username == username).order(-MyBets.bet_time)
+
+        template_values = {'unique_user' : unique_user, 'squad' : squad, 'bet' : bet}
+
+        template = JINJA_ENVIRONMENT.get_template('betResults.html')
         self.response.write(template.render(template_values))
 
     def post(self):
@@ -41,25 +48,10 @@ class UserProfile(webapp2.RequestHandler):
         unique_key = ndb.Key('UserModel', myuser.username)
         unique_user = unique_key.get()
 
+        squad_key = ndb.Key('MySquad', myuser.username)
+        squad = squad_key.get()
+
         action = self.request.get('button')
 
         if action == "Logout":
             self.redirect('/')
-
-        if action == "Build Squad":
-            self.redirect('/buildSquad?username='+unique_user.username)
-
-        if action == "Edit Squad":
-            self.redirect('/buildSquad?username='+unique_user.username)
-
-        if action == "Place Bets":
-            self.redirect('/betting?username='+unique_user.username)
-
-        if action == "Bet Results":
-            self.redirect('/betResults?username='+unique_user.username)
-
-
-        template_values = {'unique_user' : unique_user}
-
-        template = JINJA_ENVIRONMENT.get_template('userProfile.html')
-        self.response.write(template.render(template_values))

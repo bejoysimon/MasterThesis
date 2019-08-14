@@ -10,6 +10,11 @@ indexes:
   properties:
   - name: "username"
   - name: "market_name"
+- kind: "MyBets"
+  properties:
+  - name: "username"
+  - name: "bet_time"
+    direction: desc
 - kind: "TweetsModel"
   properties:
   - name: "username"

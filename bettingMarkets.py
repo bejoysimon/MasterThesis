@@ -10,3 +10,4 @@ class BettingMarkets(ndb.Model):
     market_so_far = ndb.IntegerProperty()
     market_sell_price = ndb.FloatProperty()
     market_buy_price = ndb.FloatProperty()
+    market_settlement = ndb.IntegerProperty()

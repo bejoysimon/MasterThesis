@@ -31,8 +31,7 @@ class Betting(webapp2.RequestHandler):
 
         market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 
-        bet_key = ndb.Key('MyBets', username)
-        bet = bet_key.get()
+        bet = MyBets.query(MyBets.username == username).order(-MyBets.bet_time)
 
         template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market, 'bet' : bet}
 
@@ -52,29 +51,83 @@ class Betting(webapp2.RequestHandler):
         squad_key = ndb.Key('MySquad', myuser.username)
         squad = squad_key.get()
 
-        bet_key = ndb.Key('MyBets', myuser.username)
-        bet = bet_key.get()
-        
+        # market_name = self.request.get('market_name')
+        #
+        # user_market_key = myuser.username + market_name
+        # market_key = ndb.Key('BettingMarkets', user_market_key)
+        # market = market_key.get()
 
         action = self.request.get('button')
 
         if action == "Logout":
             self.redirect('/')
 
-        # if action == "SELL":
-        #     add_bet = MyBets(username = myuser.username,
-        #                     squad_name = squad.sqaud_name,
-        #                     bet_id =
-        #                     bet_market =
-        #                     bet_action = action,
-        #                     bet_sell_price =
-        #                     bet_buy_price = )
-        #     add_bet.put()
-        #
-        #     self.redirect('/betting?username='+myuser.username)
+        if action == "BUY":
+            market_name = self.request.get('market_name')
+            market_so_far = int(self.request.get('market_so_far'))
+            bet_stake = float(self.request.get('bet_stake'))
+            market_buy_price = float(self.request.get('market_buy_price'))
+            balance = unique_user.balance
 
+            bet_margin = (market_buy_price - market_so_far) * bet_stake
 
-        template_values = {'unique_user' : unique_user}
+            if bet_margin < balance:
+                balance = unique_user.balance - bet_margin
+                unique_user.balance = balance
+                unique_user.put()
 
-        template = JINJA_ENVIRONMENT.get_template('betting.html')
-        self.response.write(template.render(template_values))
+                add_bet = MyBets(username = myuser.username,
+                                squad_name = squad.squad_name,
+                                bet_market = market_name,
+                                bet_action = action,
+                                bet_price = market_buy_price,
+                                bet_stake = bet_stake)
+                add_bet.put()
+
+                self.redirect('/betting?username='+myuser.username)
+            else:
+                self.response.write("***Insufficient Balance!***")
+
+                market = BettingMarkets.query(BettingMarkets.username == myuser.username).order(BettingMarkets.market_name)
+
+                bet = MyBets.query(MyBets.username == myuser.username).order(-MyBets.bet_time)
+
+                template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market, 'bet' : bet}
+
+                template = JINJA_ENVIRONMENT.get_template('betting.html')
+                self.response.write(template.render(template_values))
+
+        if action == "SELL":
+            market_name = self.request.get('market_name')
+            market_so_far = int(self.request.get('market_so_far'))
+            bet_stake = float(self.request.get('bet_stake'))
+            market_sell_price = float(self.request.get('market_sell_price'))
+            balance = unique_user.balance
+
+            bet_margin = (2 * market_sell_price) * bet_stake
+
+            if bet_margin < balance:
+                balance = unique_user.balance - bet_margin
+                unique_user.balance = balance
+                unique_user.put()
+
+                add_bet = MyBets(username = myuser.username,
+                                squad_name = squad.squad_name,
+                                bet_market = market_name,
+                                bet_action = action,
+                                bet_price = market_sell_price,
+                                bet_stake = bet_stake)
+                add_bet.put()
+
+                self.redirect('/betting?username='+myuser.username)
+            else:
+                self.response.write("***Insufficient Balance!***")
+
+                market = BettingMarkets.query(BettingMarkets.username == myuser.username).order(BettingMarkets.market_name)
+
+                bet = MyBets.query(MyBets.username == myuser.username).order(-MyBets.bet_time)
+
+                template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market, 'bet' : bet}
+
+                template = JINJA_ENVIRONMENT.get_template('betting.html')
+                self.response.write(template.render(template_values))

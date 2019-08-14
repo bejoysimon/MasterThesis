@@ -14,18 +14,51 @@
     Email: {{ unique_user.email }}<br/>
     Name: {{ unique_user.name }}<br/>
     Account Balance: {{ unique_user.balance }}  <br/><br/></p>
+    <div class="">
+      <h4>Line-Up for {{ squad.squad_name }}</h4>
+      <h4>Starting Eleven</h4>
+        {{ squad.gkp1 }}(GK)<br/>
+        {{ squad.def1 }}<br/>
+        {{ squad.def2 }}<br/>
+        {{ squad.def3 }}<br/>
+        {{ squad.def4 }}<br/>
+        {{ squad.mid1 }}<br/>
+        {{ squad.mid2 }}<br/>
+        {{ squad.mid3 }}<br/>
+        {{ squad.mid4 }}<br/>
+        {{ squad.fwd1 }}<br/>
+        {{ squad.fwd2 }}<br/>
+      <h4>Substitutes</h4>
+        {{ squad.gkp2 }}(GK)<br/>
+        {{ squad.def5 }}<br/>
+        {{ squad.mid5 }}<br/>
+        {{ squad.fwd3 }}<br/>
+    </div><br/>
     <table>
-      <tr><th>Username</th><th>Squad Name</th><th>Market</th><th>So Far</th><th>Pricing</th></tr>
+      <tr><th>Username</th><th>Squad Name</th><th>Market</th><th>So Far</th><th>Settlement</th><th>Pricing</th></tr>
       {% for i in market %}
+      {% if i.market_settlement == None %}
       <form method="post" action="/updateMarkets">
       <tr><td><input type="text" name="username" value="{{ unique_user.username }}" readonly></td>
       <td><input type="text" name="squad_name" value="{{ squad.squad_name }}" readonly></td>
       <td><input type="text" name="updated_name" value="{{ i.market_name }}" required></td>
       <td><input type="text" name="updated_so_far" value="{{ i.market_so_far }}" required></td>
+      <td><input type="text" name="market_settlement" value="{{ i.market_settlement }}"></td>
       <td><input type="text" name="updated_sell_price" value="{{ i.market_sell_price }}" required>
-      <input type="text" name="updated_buy_price" value="{{ i.market_buy_price }}" required>
-      <input type="submit" value="Update" name="button"/></td></tr>
+          <input type="text" name="updated_buy_price" value="{{ i.market_buy_price }}" required>
+          <input type="submit" value="Update" name="button"/></td></tr>
       </form>
+      {% else %}
+      <form method="post" action="/updateMarkets">
+      <tr><td><input type="text" name="username" value="{{ unique_user.username }}" disabled></td>
+      <td><input type="text" name="squad_name" value="{{ squad.squad_name }}" disabled></td>
+      <td><input type="text" name="updated_name" value="{{ i.market_name }}" disabled></td>
+      <td><input type="text" name="updated_so_far" value="Settled" disabled></td>
+      <td><input type="text" name="market_settlement" value="{{ i.market_settlement }}" disabled></td>
+      <td><input type="text" name="updated_sell_price" value="Settled" disabled>
+          <input type="text" name="updated_buy_price" value="Settled" disabled></td></tr>
+      </form>
+      {% endif %}
       {% endfor %}
     </table>
   </body>
