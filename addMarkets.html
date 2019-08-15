@@ -15,7 +15,7 @@
       Name: {{ unique_user.name }}<br/>
       Account Balance: {{ unique_user.balance }}<br/><br/></p>
       <div class="">
-        <h4>Line-Up for {{ squad.squad_name }}</h4>
+        <h3>Line-Up for {{ squad.squad_name }}</h3>
         <h4>Starting Eleven</h4>
           {{ squad.gkp1 }}(GK)<br/>
           {{ squad.def1 }}<br/>
@@ -33,7 +33,7 @@
           {{ squad.def5 }}<br/>
           {{ squad.mid5 }}<br/>
           {{ squad.fwd3 }}<br/>
-      </div><br/> 
+      </div><br/>
       <h3>Add Betting Markets</h3>
       Add betting markets for {{ unique_user.username }}<br/><br/>
       <input type="text" name="username" value="{{ unique_user.username }}" readonly>

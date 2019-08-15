@@ -29,11 +29,11 @@ class BetResults(webapp2.RequestHandler):
         squad_key = ndb.Key('MySquad', username)
         squad = squad_key.get()
 
-        # market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
+        market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 
         bet = MyBets.query(MyBets.username == username).order(-MyBets.bet_time)
 
-        template_values = {'unique_user' : unique_user, 'squad' : squad, 'bet' : bet}
+        template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market,  'bet' : bet}
 
         template = JINJA_ENVIRONMENT.get_template('betResults.html')
         self.response.write(template.render(template_values))

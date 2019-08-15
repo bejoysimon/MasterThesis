@@ -23,17 +23,14 @@
       {% endfor %}
     {% endif %}
     <h3>Settled Bets</h3>
-    <table>
       {% for i in bet %}
       {% if i.bet_settlement != None %}
       <form>
-        <input type="text" name="market_name" value="{{ i.bet_market }}" readonly>
+        <input type="text" name="bet_market" value="{{ i.bet_market }}" readonly>
         <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" readonly>
         <input type="text" name="bet_action" value="{{ i.bet_action }}" readonly>
         <input type="text" name="bet_settlement" value="Settled @{{ i.bet_settlement }}" readonly>
-      </form>
-      {% else %}
-      <p>No settled bets at the moment. Please wait for the matches to finish.</p>
+      </form><br/>
       {% endif %}
       {% endfor %}
     </table>
@@ -42,15 +39,11 @@
       {% for i in bet %}
       {% if i.bet_settlement == None %}
       <form>
-        <input type="text" name="market_name" value="{{ i.market_name }}" readonly>
-        <input type="text" name="market_so_far" value="{{ i.market_so_far }}" readonly>
-        <input type="text" name="market_sell_price" value="{{ i.market_sell_price }}" readonly>
-        <input type="text" name="market_buy_price" value="{{ i.market_buy_price }}" readonly>
-      </form>
-      {% else %}
-      <p>No open bets at the moment. Please place new bets.</p>
+        <input type="text" name="bet_market" value="{{ i.bet_market }}" readonly>
+        <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" readonly>
+        <input type="text" name="bet_action" value="{{ i.bet_action }} @{{ i.bet_price }}" readonly>
+      </form><br/>
       {% endif %}
       {% endfor %}
-    </table>
   </body>
 </html>
