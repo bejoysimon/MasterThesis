@@ -1,24 +1,27 @@
 <html>
   <head>
-    <title>Add PlayersData from File</title>
     <meta charset="utf-8"/>
+    <title>Add PlayersData from File</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
   <body>
-    <form method="get" action="/">
-      <input type="submit" value="Home" name="button"/>
-    </form>
-    <a href="/adminPage">Back to Admin Page</a><br/><br/>
-    <h3>Import Data</h3>
-    Import Player's data to datastore from a file<br/><br/>
-    <!-- form for uploading a file to the blobstore -->
-    <form action="{{ upload_url }}" method="post" enctype="multipart/form-data">
-    Upload File: <input type="file" name="file" required /><br/><br/>
-    <input type="submit"/>
-    </form>
-    <!-- we will then list the blobs that we do have in the datastore
-    available to us -->
-    {% for i in collection.filenames %}
-    {{ i }}
-    {% endfor %}
+    <div class="container">
+      <form method="get" action="/">
+        <input type="submit" value="Home" name="button"/>
+      </form>
+      <a href="/adminPage">Back to Admin Page</a><br/><br/>
+      <h3>Import Data</h3>
+      Import Player's data to datastore from a file<br/><br/>
+      <!-- form for uploading a file to the blobstore -->
+      <form action="{{ upload_url }}" method="post" enctype="multipart/form-data">
+      Upload File: <input type="file" name="file" required /><br/><br/>
+      <input type="submit"/>
+      </form>
+      <!-- we will then list the blobs that we do have in the datastore
+      available to us -->
+      {% for i in collection.filenames %}
+      {{ i }}
+      {% endfor %}
+    </div>
   </body>
 </html>

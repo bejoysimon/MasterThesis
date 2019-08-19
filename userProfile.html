@@ -2,31 +2,45 @@
   <head>
     <meta charset="utf-8"/>
     <title>User Profile</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
   <body>
-    <form method="get" action="/">
-      <input type="submit" value="Logout" name="button"/>
-    </form>
-    <h2>My Profile</h2>
-    Welcome {{ unique_user.username }} to your FootySquadPro Profile.<br/>
-      <p>Username: {{ unique_user.username }}<br/>
-      Email: {{ unique_user.email }}<br/>
-      Name: {{ unique_user.name }}<br/>
-      Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}">Manage</a><br/><br/>
-      <a href="/scoring?username={{ unique_user.username }}">Scoring System</a>
-      <a href="/rules?username={{ unique_user.username }}">Game Rules</a>
-      <a href="/playerStats?username={{ unique_user.username }}">Player Statistics</a></p>
-    <h3>Squads</h3>
-    Every user can have only one squad to bet on FantasySquadPro. Build your squad and enjoy.<br/><br/>
-    <form method="post" action="/userProfile">
-      {% if squad %}
-      My Squad : {{ squad.squad_name }}
-      <input type="submit" value="Edit Squad" name="button"/>
-      <input type="submit" value="Place Bets" name="button"/>
-      <input type="submit" value="Bet Results" name="button"/>
-      {% else %}
-      <input type="submit" value="Build Squad" name="button"/>
-      {% endif %}
-    </form>
+    <div class="container">
+      <header class="">
+        <a href="/userProfile?username={{ unique_user.username }}"><h1 class="jumbotron logo border">FootySquadPro</h1></a>
+        <nav class="navbar-nav navbar-toggler">
+          <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
+          <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
+          <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
+          <form method="get" action="/">
+            <input type="submit" value="Logout" name="button" class="btn btn-danger btn-block border "/>
+          </form>
+        </nav>
+      </header>
+      <main class="border-top">
+        <section class="">
+          <h2>My Profile</h2>
+          Welcome {{ unique_user.username }} to your FootySquadPro Profile.<br/>
+            Username: {{ unique_user.username }}<br/>
+            Email: {{ unique_user.email }}<br/>
+            Name: {{ unique_user.name }}<br/>
+            Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}" class="btn badge-pill badge-primary" >Manage</a><br/><br/>
+        </section>
+        <section class="">
+          <h3>Squad</h3>
+          Every user can have only one squad to bet on FantasySquadPro. Build your squad and enjoy.<br/><br/>
+          <form method="post" action="/userProfile">
+            {% if squad %}
+            My Squad : {{ squad.squad_name }}
+            <input type="submit" value="Edit Squad" name="button" class="btn btn-primary"/>
+            <input type="submit" value="Place Bets" name="button" class="btn btn-primary"/>
+            <input type="submit" value="Bet Results" name="button" class="btn btn-primary"/>
+            {% else %}
+            <input type="submit" value="Build Squad" name="button" class="btn btn-primary"/>
+            {% endif %}
+          </form>
+        </section>
+      </main>
+    </div>
   </body>
 </html>

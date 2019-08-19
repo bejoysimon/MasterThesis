@@ -2,20 +2,23 @@
   <head>
     <meta charset="utf-8"/>
     <title>FootySquadPro</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
   <body>
-    <h2>FootySquadPro</h2>
-    {% if user %}
-    <p>{{ welcome }} {{ user.email() }} to FootySquadPro! </p>
-      {% if admin %}
-      <a href="/adminPage">Admin Page</a><br/>
+    <div class="container">
+      <h2>FootySquadPro</h2>
+      {% if user %}
+      <p>{{ welcome }} {{ user.email() }} to FootySquadPro! </p>
+        {% if admin %}
+        <a href="/adminPage">Admin Page</a><br/>
+        {% else %}
+        <a href="/userSignUp">Sign In / Register</a>
+        <br/>
+        {% endif %}
       {% else %}
-      <a href="/userSignUp">Sign In / Register</a>
-      <br/>
+      <p>Hello guest, welcome to FootySquadPro!</p>
       {% endif %}
-    {% else %}
-    <p>Hello guest, welcome to FootySquadPro!</p>
-    {% endif %}
-    <p>You can {{ url_string }} <a href='{{ url }}'>here.</a></p>
+      <p>You can {{ url_string }} <a href='{{ url }}'>here.</a></p>
+    </div>
   </body>
 </html>

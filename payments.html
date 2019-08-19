@@ -2,39 +2,51 @@
   <head>
     <meta charset="utf-8"/>
     <title>User Payments</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
   <body>
-    <form method="get" action="/">
-      <input type="submit" value="Logout" name="button"/>
-    </form>
-    <a href="/userProfile?username={{ unique_user.username }}">Back to my profile.</a>
-    <h2>Manage Payments</h2>
-    Welcome {{ unique_user.username }} to your Manage Payments page.<br/>
-    <form method="post" action="/payments">
-      <h4>ACCOUNT DETAILS</h4>
-      Username: {{ unique_user.username }}<br/>
-      Email: {{ unique_user.email }}<br/>
-      Name: {{ unique_user.name }}<br/>
-      Account Balance: {{ unique_user.balance }}<br/><br/>
-    </form>
-    <form method="post" action="/payments">
-      <h4>DEPOSIT</h4>
-      <p>Please deposit by providing card details below.</p>
-      <p>Card Number: <input type="text" name="cardNo" value="" required></p>
-      <p>Name on card: <input type="text" name="cardName" value="" required></p>
-      <p>Valid through: <input type="month" name="cardExpiry" value="" required></p>
-      <p>CVV: <input type="text" name="cardCVV" value="" required></p>
-      <input type="submit" value="Deposit" name="button"/><br/><br/>
-    </form>
-    <form method="post" action="/payments">
-      <h4>WITHDRAWAL</h4>
-      <p>Please request for withdrawal by providing bank details below.</p>
-      <p>Account Number: <input type="text" name="accNo" value="" required></p>
-      <p>IBAN: <input type="text" name="iban" value="" required></p>
-      <p>Sort Code: <input type="text" name="sortCode" value="" required></p>
-      <p>BIC/Swift Code: <input type="text" name="bicSwift" value="" required></p>
-      <p>Bank Address: <input type="text" name="address" value="" required></p>
-      <input type="submit" value="Withdraw" name="button"/>
-    </form>
+    <div class="container">
+      <header class="">
+        <a href="/userProfile?username={{ unique_user.username }}"><h1 class="jumbotron logo border">FootySquadPro</h1></a>
+        <nav class="navbar-nav navbar-toggler">
+          <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
+          <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
+          <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
+          <form method="get" action="/">
+            <input type="submit" value="Logout" name="button" class="btn btn-danger btn-block border "/>
+          </form>
+        </nav>
+      </header>
+      <main class="border-top">
+        <h2>Manage Payments</h2>
+        Welcome {{ unique_user.username }} to your Manage Payments page.<br/>
+        <form method="post" action="/payments">
+          <h4>ACCOUNT DETAILS</h4>
+          Username: {{ unique_user.username }}<br/>
+          Email: {{ unique_user.email }}<br/>
+          Name: {{ unique_user.name }}<br/>
+          Account Balance: {{ unique_user.balance }}<br/><br/>
+        </form>
+        <form method="post" action="/payments">
+          <h4>DEPOSIT</h4>
+          <p>Please deposit by providing card details below.</p>
+          <p>Card Number: <input type="text" name="cardNo" value="" required></p>
+          <p>Name on card: <input type="text" name="cardName" value="" required></p>
+          <p>Valid through: <input type="month" name="cardExpiry" value="" required></p>
+          <p>CVV: <input type="text" name="cardCVV" value="" required></p>
+          <input type="submit" value="Deposit" name="button"/><br/><br/>
+        </form>
+        <form method="post" action="/payments">
+          <h4>WITHDRAWAL</h4>
+          <p>Please request for withdrawal by providing bank details below.</p>
+          <p>Account Number: <input type="text" name="accNo" value="" required></p>
+          <p>IBAN: <input type="text" name="iban" value="" required></p>
+          <p>Sort Code: <input type="text" name="sortCode" value="" required></p>
+          <p>BIC/Swift Code: <input type="text" name="bicSwift" value="" required></p>
+          <p>Bank Address: <input type="text" name="address" value="" required></p>
+          <input type="submit" value="Withdraw" name="button"/>
+        </form>
+      </main>
+    </div>
   </body>
 </html>

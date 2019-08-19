@@ -2,59 +2,75 @@
   <head>
     <meta charset="utf-8"/>
     <title>Player Stats</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
   <body>
-    <form method="get" action="/">
-      <input type="submit" value="Logout" name="button"/>
-    </form>
-    <a href="/userProfile?username={{ unique_user.username }}">Back to my profile.</a>
-    <h2>Player Statistics</h2>
-    Welcome {{ unique_user.username }} to Player Statistics page.<br/><br/>
-    <div class="">
-      {{figure}}
+    <div class="container">
+      <header class="">
+        <a href="/userProfile?username={{ unique_user.username }}"><h1 class="jumbotron logo border">FootySquadPro</h1></a>
+        <nav class="navbar-nav navbar-toggler">
+          <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
+          <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
+          <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
+          <form method="get" action="/">
+            <input type="submit" value="Logout" name="button" class="btn btn-danger btn-block border "/>
+          </form>
+        </nav>
+      </header>
+      <main class="border-top">
+        <section class="">
+          <h2>Player Statistics</h2>
+          Welcome {{ unique_user.username }} to Player Statistics page.<br/><br/>
+          <div class="">
+            {{figure}}
+          </div>
+          <form method="post" action="/playerStats">
+            View player statistics by their playing position. Choose a position below:<br/>
+            <p><input type="radio" name="position" value="GKP" required>Goalkeepers
+            <input type="radio" name="position" value="DEF" required>Defenders
+            <input type="radio" name="position" value="MID" required>Midfielders
+            <input type="radio" name="position" value="FWD" required>Forwards</p>
+            <input type="submit" value="View" name="button"/><br/><br/>
+          </form>
+        </section>
+        <section class="">
+          {% if result %}
+          <table>
+            <tr>
+              <th>Name</th><th>Team</th><th>Position</th><th>Cost</th><th>Creativity</th><th>Influence</th>
+              <th>Threat</th><th>ICT</th><th>Goals Conceded</th><th>Goals Scored</th><th>Assists</th>
+              <th>Own Goals</th><th>Penalties Missed</th><th>Penalties Saved</th><th>Saves</th>
+              <th>Yellow Cards</th><th>Red Cards</th><th>TSB</th><th>Minutes</th><th>Bonus</th><th>Points</th>
+            </tr>
+            {% for i in result %}
+            <tr>
+              <td><a href="/playerProfile?username={{ unique_user.username }}&name={{ i.name }}">{{ i.name }}</a></td>
+              <td>{{ i.team }}</td>
+              <td>{{ i.position }}</td>
+              <td>{{ i.cost }}</td>
+              <td>{{ i.creativity }}</td>
+              <td>{{ i.influence }}</td>
+              <td>{{ i.threat }}</td>
+              <td>{{ i.ict }}</td>
+              <td>{{ i.goals_conceded }}</td>
+              <td>{{ i.goals_scored }}</td>
+              <td>{{ i.assists }}</td>
+              <td>{{ i.own_goals }}</td>
+              <td>{{ i.penalties_missed }}</td>
+              <td>{{ i.penalties_saved }}</td>
+              <td>{{ i.saves }}</td>
+              <td>{{ i.yellow_cards }}</td>
+              <td>{{ i.red_cards }}</td>
+              <td>{{ i.tsb }}</td>
+              <td>{{ i.minutes }}</td>
+              <td>{{ i.bonus }}</td>
+              <td>{{ i.points }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+          {% endif %}
+        </section>
+      </main>
     </div>
-    <form method="post" action="/playerStats">
-      View player statistics by their playing position. Choose a position below:<br/>
-      <p><input type="radio" name="position" value="GKP" required>Goalkeepers
-      <input type="radio" name="position" value="DEF" required>Defenders
-      <input type="radio" name="position" value="MID" required>Midfielders
-      <input type="radio" name="position" value="FWD" required>Forwards</p>
-      <input type="submit" value="View" name="button"/><br/><br/>
-    </form>
-    {% if result %}
-    <table>
-      <tr>
-        <th>Name</th><th>Team</th><th>Position</th><th>Cost</th><th>Creativity</th><th>Influence</th>
-        <th>Threat</th><th>ICT</th><th>Goals Conceded</th><th>Goals Scored</th><th>Assists</th>
-        <th>Own Goals</th><th>Penalties Missed</th><th>Penalties Saved</th><th>Saves</th>
-        <th>Yellow Cards</th><th>Red Cards</th><th>TSB</th><th>Minutes</th><th>Bonus</th><th>Points</th>
-      </tr>
-      {% for i in result %}
-      <tr>
-        <td><a href="/playerProfile?username={{ unique_user.username }}&name={{ i.name }}">{{ i.name }}</a></td>
-        <td>{{ i.team }}</td>
-        <td>{{ i.position }}</td>
-        <td>{{ i.cost }}</td>
-        <td>{{ i.creativity }}</td>
-        <td>{{ i.influence }}</td>
-        <td>{{ i.threat }}</td>
-        <td>{{ i.ict }}</td>
-        <td>{{ i.goals_conceded }}</td>
-        <td>{{ i.goals_scored }}</td>
-        <td>{{ i.assists }}</td>
-        <td>{{ i.own_goals }}</td>
-        <td>{{ i.penalties_missed }}</td>
-        <td>{{ i.penalties_saved }}</td>
-        <td>{{ i.saves }}</td>
-        <td>{{ i.yellow_cards }}</td>
-        <td>{{ i.red_cards }}</td>
-        <td>{{ i.tsb }}</td>
-        <td>{{ i.minutes }}</td>
-        <td>{{ i.bonus }}</td>
-        <td>{{ i.points }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    {% endif %}
   </body>
 </html>
