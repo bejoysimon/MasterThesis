@@ -4,23 +4,33 @@
     <title>User SignUp</title>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
-  <body>
-    <div class="container">
-      {% if actual_username %}
-        <form method="post" action="/userSignUp">
-        Enter your existing username: <input type="text" name="username" required />
-        <input type="submit" value="Submit" name="button"/>
-        </form>
-      {% else %}
-        <form method="post" action="/userSignUp">
-        <p>Choose a username: <input type="text" name="username" pattern="^[a-zA-Z]+$" required /></p>
-        <p>Enter Name: <input type="text" name="name" required /></p>
-        <input type="submit" value="Create" name="button"/>
-        </form>
-      {% endif %}
-      <form method="get" action="/">
-      <input type="submit" value="Home" name="button"/>
-      </form>
+  <body class="bg-light">
+    <div class="container-fluid">
+      <header class="">
+        <a href="/"><h1 class="jumbotron logo border">FootySquadPro</h1></a>
+        <nav class="navbar-nav navbar-toggler">
+          <a class="btn btn-danger border " href="/userSignUp">Scoring System</a>
+          <a class="btn btn-danger border " href="/userSignUp">Game Rules</a>
+          <a class="btn btn-danger border " href="/userSignUp">Player Statistics</a>
+          <a class="btn btn-danger border " href="/">Logout</a><br/>
+        </nav>
+      </header>
+      <main class="border-top">
+        <section class="">
+          {% if actual_username %}
+            <form method="post" action="/userSignUp">
+            Enter your existing username: <input type="text" name="username" required />
+            <input type="submit" value="Submit" name="button" class="btn btn-primary"/>
+            </form>
+          {% else %}
+            <form method="post" action="/userSignUp">
+            <p>Choose a username: <input type="text" name="username" pattern="^[a-zA-Z]+$" required /></p>
+            <p>Enter Name: <input type="text" name="name" required /></p>
+            <input type="submit" value="Create" name="button" class="btn btn-primary"/>
+            </form>
+          {% endif %}
+        </section>
+      </main>
     </div>
   </body>
 </html>

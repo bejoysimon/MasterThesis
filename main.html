@@ -4,21 +4,34 @@
     <title>FootySquadPro</title>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
-  <body>
-    <div class="container">
-      <h2>FootySquadPro</h2>
-      {% if user %}
-      <p>{{ welcome }} {{ user.email() }} to FootySquadPro! </p>
-        {% if admin %}
-        <a href="/adminPage">Admin Page</a><br/>
-        {% else %}
-        <a href="/userSignUp">Sign In / Register</a>
-        <br/>
-        {% endif %}
-      {% else %}
-      <p>Hello guest, welcome to FootySquadPro!</p>
-      {% endif %}
-      <p>You can {{ url_string }} <a href='{{ url }}'>here.</a></p>
+  <body class="bg-light">
+    <div class="container-fluid">
+      <header class="">
+        <a href="/"><h1 class="jumbotron logo border">FootySquadPro</h1></a>
+        <nav class="navbar-nav navbar-toggler">
+          <a class="btn btn-danger border " href="/">Scoring System</a>
+          <a class="btn btn-danger border " href="/">Game Rules</a>
+          <a class="btn btn-danger border " href="/">Player Statistics</a>
+          <a class="btn btn-danger border " href="{{ url }}">Logout</a><br/>
+        </nav>
+      </header>
+      <main class="border-top">
+        <section class="">
+          <h2>Welcome</h2>
+          {% if user %}
+          <p>{{ welcome }} {{ user.email() }} to FootySquadPro! </p>
+            {% if admin %}
+            <a href="/adminPage" class="btn badge-pill badge-primary">Admin Page</a><br/><br/>
+            {% else %}
+            <a href="/userSignUp" class="btn badge-pill badge-primary">Sign In / Register</a><br/>
+            <br/>
+            {% endif %}
+          {% else %}
+          <p>Hello guest, welcome to FootySquadPro!</p>
+          {% endif %}
+          <p>You can {{ url_string }} <a href='{{ url }}' class="btn badge-pill badge-primary">here.</a></p>
+        </section>
+      </main>
     </div>
   </body>
 </html>

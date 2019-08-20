@@ -4,26 +4,37 @@
     <title>Admin Page</title>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
-  <body>
-    <div class="container">
-      <form method="get" action="/">
-        <input type="submit" value="Home" name="button"/>
-      </form>
-      <form method="post" action="/adminPage">
-        <h2>Admin Page</h2>
-        <p>Welcome Admin to your FootySquadPro Admin Page. </p>
-        Total Users: {{ squad.count() }}<br/><br/>
-        <h3>Import Data</h3>
-        <p>Import Player's Data from <a href="/addPlayersData">here.</a><br/></p>
-      </form>
-      <br/>
-      <form method="post" action="/adminPage">
-        <h3>Add Betting Markets</h3>
-        <p>Select a squad to add it's betting markets</p>
-        {% for i in squad %}
-          {{ i.username }} --> <a href="/addMarkets?username={{ i.username }}">{{ i.squad_name }}</a><br/>
-        {% endfor %}
-      </form>
+  <body class="bg-light">
+    <div class="container-fluid">
+      <header class="">
+        <a href="/adminPage"><h1 class="jumbotron logo border">FootySquadPro</h1></a>
+        <nav class="navbar-nav navbar-toggler">
+          <a class="btn btn-danger border " href="/adminPage">Scoring System</a>
+          <a class="btn btn-danger border " href="/adminPage">Game Rules</a>
+          <a class="btn btn-danger border " href="/adminPage">Player Statistics</a>
+          <a class="btn btn-danger border " href="/">Logout</a><br/>
+        </nav>
+      </header>
+      <main class="border-top">
+        <section class="">
+          <h2>Admin Page</h2>
+          <p>Welcome Admin to your FootySquadPro Admin Page. <br/>
+            Total Users: {{ squad.count() }}<br/></p>
+        </section>
+        <section class="">
+          <h3>Import Data</h3>
+          <p>Import Player's Data from <a href="/addPlayersData" class="btn badge-pill badge-primary">here.</a><br/></p>
+        </section>
+        <section class="">
+          <form method="post" action="/adminPage">
+            <h3>Add Betting Markets</h3>
+            <p>Select a squad to add it's betting markets</p>
+            {% for i in squad %}
+              <p>{{ i.username }} <a href="/addMarkets?username={{ i.username }}" class="btn badge-pill badge-primary">{{ i.squad_name }}</a><br/></p>
+            {% endfor %}
+          </form>
+        </section>
+      </main>
     </div>
   </body>
 </html>

@@ -4,17 +4,15 @@
     <title>Game Rules</title>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
-  <body>
-    <div class="container">
+  <body class="bg-light">
+    <div class="container-fluid">
       <header class="">
         <a href="/userProfile?username={{ unique_user.username }}"><h1 class="jumbotron logo border">FootySquadPro</h1></a>
         <nav class="navbar-nav navbar-toggler">
           <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
           <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
           <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
-          <form method="get" action="/">
-            <input type="submit" value="Logout" name="button" class="btn btn-danger btn-block border "/>
-          </form>
+          <a class="btn btn-danger border" href="/">Logout</a><br/>
         </nav>
       </header>
       <main class="border-top">
@@ -69,7 +67,7 @@
           <h2>WILDCARDS</h2>
           Some season long games will allow the use of a wildcard during specified periods.
           The rules for wildcards are explained on the game information page of these games.<br/><br/>
-        </section>        
+        </section>
       </main>
     </div>
   </body>

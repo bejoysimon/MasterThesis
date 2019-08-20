@@ -30,6 +30,7 @@ class BuildSquad(webapp2.RequestHandler):
 
         img = '/static/blank_player_pic.png'
 
+        query_all = PlayersData.query()
         query_gkp = PlayersData.query(PlayersData.position == 'GKP')
         query_def = PlayersData.query(PlayersData.position == 'DEF')
         query_mid = PlayersData.query(PlayersData.position == 'MID')
@@ -38,6 +39,7 @@ class BuildSquad(webapp2.RequestHandler):
         template_values = {'unique_user' : unique_user,
                             'img' : img,
                             'squad' : squad,
+                            'all' : query_all,
                             'gkp' : query_gkp,
                             'def' : query_def,
                             'mid' : query_mid,

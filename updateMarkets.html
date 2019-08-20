@@ -4,96 +4,112 @@
     <title>Update Markets</title>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
-  <body>
-    <div class="container">
-      <form method="get" action="/">
-        <input type="submit" value="Home" name="button"/>
-      </form>
-      <a href="/adminPage">Back to Admin Page</a>
-      <h3>Update Betting Markets</h3>
-      <p>Update betting markets for {{ unique_user.username }}<br/><br/>
-      Username: {{ unique_user.username }}<br/>
-      Email: {{ unique_user.email }}<br/>
-      Name: {{ unique_user.name }}<br/>
-      Account Balance: {{ unique_user.balance }}  <br/><br/></p>
-      <div class="">
-        <h3>Line-Up for {{ squad.squad_name }}</h3>
-        <h4>Starting Eleven</h4>
-          {{ squad.gkp1 }}(GK)<br/>
-          {{ squad.def1 }}<br/>
-          {{ squad.def2 }}<br/>
-          {{ squad.def3 }}<br/>
-          {{ squad.def4 }}<br/>
-          {{ squad.mid1 }}<br/>
-          {{ squad.mid2 }}<br/>
-          {{ squad.mid3 }}<br/>
-          {{ squad.mid4 }}<br/>
-          {{ squad.fwd1 }}<br/>
-          {{ squad.fwd2 }}<br/>
-        <h4>Substitutes</h4>
-          {{ squad.gkp2 }}(GK)<br/>
-          {{ squad.def5 }}<br/>
-          {{ squad.mid5 }}<br/>
-          {{ squad.fwd3 }}<br/>
-      </div><br/>
-      {% if bet.count()>0 %}
-      <h3>Bet Summary</h3>
-      <p>A list of bets placed by {{ unique_user.username }} is shown below.</p>
-        {% for i in bet %}
-        {{loop.index}}. €{{ i.bet_stake }} {{ i.bet_action }} of {{ i.bet_market }} @{{ i.bet_price }}.<br/>
-        {% endfor %}
-      {% endif %}
-      <h3>Settled Bets</h3>
-        {% for i in bet %}
-        {% if i.bet_settlement != None %}
-        <form>
-          <input type="text" name="bet_market" value="{{ i.bet_market }}" readonly>
-          <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" readonly>
-          <input type="text" name="bet_action" value="{{ i.bet_action }}" readonly>
-          <input type="text" name="bet_settlement" value="Settled @{{ i.bet_settlement }}" readonly>
-        </form><br/>
-        {% endif %}
-        {% endfor %}
-      </table>
-      <h3>Open Bets</h3>
-      <table>
-        {% for i in bet %}
-        {% if i.bet_settlement == None %}
-        <form>
-          <input type="text" name="bet_market" value="{{ i.bet_market }}" readonly>
-          <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" readonly>
-          <input type="text" name="bet_action" value="{{ i.bet_action }} @{{ i.bet_price }}" readonly>
-        </form><br/>
-        {% endif %}
-        {% endfor %}<br/>
-      <table>
-        <h3>Update Markets</h3>
-        <tr><th>Username</th><th>Squad Name</th><th>Market</th><th>So Far</th><th>Settlement</th><th>Pricing</th></tr>
-        {% for i in market %}
-        {% if i.market_settlement == None %}
-        <form method="post" action="/updateMarkets">
-        <tr><td><input type="text" name="username" value="{{ unique_user.username }}" readonly></td>
-        <td><input type="text" name="squad_name" value="{{ squad.squad_name }}" readonly></td>
-        <td><input type="text" name="updated_name" value="{{ i.market_name }}" required></td>
-        <td><input type="text" name="updated_so_far" value="{{ i.market_so_far }}" required></td>
-        <td><input type="text" name="market_settlement" value="{{ i.market_settlement }}"></td>
-        <td><input type="text" name="updated_sell_price" value="{{ i.market_sell_price }}" required>
-            <input type="text" name="updated_buy_price" value="{{ i.market_buy_price }}" required>
-            <input type="submit" value="Update" name="button"/></td></tr>
-        </form>
-        {% else %}
-        <form method="post" action="/updateMarkets">
-        <tr><td><input type="text" name="username" value="{{ unique_user.username }}" disabled></td>
-        <td><input type="text" name="squad_name" value="{{ squad.squad_name }}" disabled></td>
-        <td><input type="text" name="updated_name" value="{{ i.market_name }}" disabled></td>
-        <td><input type="text" name="updated_so_far" value="Settled" disabled></td>
-        <td><input type="text" name="market_settlement" value="{{ i.market_settlement }}" disabled></td>
-        <td><input type="text" name="updated_sell_price" value="Settled" disabled>
-            <input type="text" name="updated_buy_price" value="Settled" disabled></td></tr>
-        </form>
-        {% endif %}
-        {% endfor %}
-      </table>
+  <body class="bg-light">
+    <div class="container-fluid">
+      <header class="">
+        <a href="/adminPage"><h1 class="jumbotron logo border">FootySquadPro</h1></a>
+        <nav class="navbar-nav navbar-toggler">
+          <a class="btn btn-danger border" href="/updateMarkets?username={{ unique_user.username }}">Scoring System</a>
+          <a class="btn btn-danger border" href="/updateMarkets?username={{ unique_user.username }}">Game Rules</a>
+          <a class="btn btn-danger border" href="/updateMarkets?username={{ unique_user.username }}">Player Statistics</a>
+          <a class="btn btn-danger border" href="/">Logout</a><br/>
+        </nav>
+      </header>
+      <main class="border-top">
+        <section class="">
+          <h3>Update Betting Markets</h3>
+          Update betting markets for {{ unique_user.username }}<br/><br/>
+          Username: {{ unique_user.username }}<br/>
+          Email: {{ unique_user.email }}<br/>
+          Name: {{ unique_user.name }}<br/>
+          Account Balance: {{ unique_user.balance }}  <br/><br/>
+        </section>
+        <aside class="">
+          <h3>Line-Up for {{ squad.squad_name }}</h3>
+          <h4>Starting Eleven</h4>
+            <p>{{ squad.gkp1 }}(GK)<br/>
+            {{ squad.def1 }}<br/>
+            {{ squad.def2 }}<br/>
+            {{ squad.def3 }}<br/>
+            {{ squad.def4 }}<br/>
+            {{ squad.mid1 }}<br/>
+            {{ squad.mid2 }}<br/>
+            {{ squad.mid3 }}<br/>
+            {{ squad.mid4 }}<br/>
+            {{ squad.fwd1 }}<br/>
+            {{ squad.fwd2 }}<br/></p>
+          <h4>Substitutes</h4>
+            <p>{{ squad.gkp2 }}(GK)<br/>
+            {{ squad.def5 }}<br/>
+            {{ squad.mid5 }}<br/>
+            {{ squad.fwd3 }}<br/></p>
+        </aside>
+        <section class="">
+          {% if bet.count()>0 %}
+          <h3>Bet Summary</h3>
+          <p>A list of bets placed by {{ unique_user.username }} is shown below.</p>
+            {% for i in bet %}
+            {{loop.index}}. €{{ i.bet_stake }} {{ i.bet_action }} of {{ i.bet_market }} @{{ i.bet_price }}.<br/>
+            {% endfor %}
+          {% endif %}
+        </section>
+        <section class="">
+          <h3>Settled Bets</h3>
+            {% for i in bet %}
+            {% if i.bet_settlement != None %}
+            <form>
+              <input type="text" name="bet_market" value="{{ i.bet_market }}" readonly>
+              <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" readonly>
+              <input type="text" name="bet_action" value="{{ i.bet_action }}" readonly>
+              <input type="text" name="bet_settlement" value="Settled @{{ i.bet_settlement }}" readonly>
+            </form><br/>
+            {% endif %}
+            {% endfor %}
+          </table>
+        </section>
+        <section class="">
+          <h3>Open Bets</h3>
+            {% for i in bet %}
+            {% if i.bet_settlement == None %}
+            <form>
+              <input type="text" name="bet_market" value="{{ i.bet_market }}" readonly>
+              <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" readonly>
+              <input type="text" name="bet_action" value="{{ i.bet_action }} @{{ i.bet_price }}" readonly>
+            </form><br/>
+            {% endif %}
+            {% endfor %}
+        </section>
+        <section class="">
+          <h3>Update Markets</h3>
+          <table class="table">
+            <tr><th>Username</th><th>Squad Name</th><th>Market</th><th>So Far</th><th>Settlement</th><th>Pricing</th><th>Update</th></tr>
+            {% for i in market %}
+            {% if i.market_settlement == None %}
+            <form method="post" action="/updateMarkets">
+            <tr><td><input type="text" name="username" value="{{ unique_user.username }}" readonly></td>
+            <td><input type="text" name="squad_name" value="{{ squad.squad_name }}" readonly></td>
+            <td><input type="text" name="updated_name" value="{{ i.market_name }}" required></td>
+            <td><input type="text" name="updated_so_far" value="{{ i.market_so_far }}" required></td>
+            <td><input type="text" name="market_settlement" value="{{ i.market_settlement }}"></td>
+            <td><input type="text" name="updated_sell_price" value="{{ i.market_sell_price }}" required>
+                <input type="text" name="updated_buy_price" value="{{ i.market_buy_price }}" required></td>
+                <td><input type="submit" value="Update" name="button" class="btn btn-primary"/></td></tr>
+            </form>
+            {% else %}
+            <form method="post" action="/updateMarkets">
+            <tr><td><input type="text" name="username" value="{{ unique_user.username }}" disabled></td>
+            <td><input type="text" name="squad_name" value="{{ squad.squad_name }}" disabled></td>
+            <td><input type="text" name="updated_name" value="{{ i.market_name }}" disabled></td>
+            <td><input type="text" name="updated_so_far" value="Settled" disabled></td>
+            <td><input type="text" name="market_settlement" value="{{ i.market_settlement }}" disabled></td>
+            <td><input type="text" name="updated_sell_price" value="Settled" disabled>
+                <input type="text" name="updated_buy_price" value="Settled" disabled></td><td>Settled</td></tr>
+            </form>
+            {% endif %}
+            {% endfor %}
+          </table>
+        </section>
+      </main>
     </div>
   </body>
 </html>

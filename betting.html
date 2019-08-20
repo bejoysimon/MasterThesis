@@ -4,60 +4,65 @@
     <title>Betting</title>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
   </head>
-  <body>
-    <div class="container">
+  <body class="bg-light">
+    <div class="container-fluid">
       <header class="">
         <a href="/userProfile?username={{ unique_user.username }}"><h1 class="jumbotron logo border">FootySquadPro</h1></a>
         <nav class="navbar-nav navbar-toggler">
           <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
           <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
           <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
-          <form method="get" action="/">
-            <input type="submit" value="Logout" name="button" class="btn btn-danger btn-block border "/>
-          </form>
+          <a class="btn btn-danger border" href="/">Logout</a><br/>
         </nav>
       </header>
       <main class="border-top">
-        <h2>Betting</h2>
-        Welcome {{ unique_user.username }} to your FootySquadPro Betting page.<br/>
-          <p>Username: {{ unique_user.username }}<br/>
-          Email: {{ unique_user.email }}<br/>
-          Name: {{ unique_user.name }}<br/>
-          Squad Name: {{ squad.squad_name }}<br/>
-          Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}">Manage</a><br/><br/></p>
-        <h3>Available Markets</h3>
-        <table>
-          <tr><th>Market</th><th>So Far</th><th>Bet Stake</th><th>Action</th></tr>
-          {% for i in market %}
-          {% if i.market_settlement == None %}
-          <form method="post" action="/betting">
-            <tr><td><input type="text" name="market_name" value="{{ i.market_name }}" readonly></td>
-                <td><input type="text" name="market_so_far" value="{{ i.market_so_far }}" readonly></td>
-                <td><input type="text" name="bet_stake" value="" required></td>
-                <td><input type="text" name="market_sell_price" value="{{ i.market_sell_price }}" readonly>
-                    <input type="text" name="market_buy_price" value="{{ i.market_buy_price }}" readonly>
-                    <input type="submit" value="SELL" name="button"/><input type="submit" value="BUY" name="button"/></td></tr>
-          </form>
-          {% else %}
-          <form method="post" action="/betting">
-            <tr><td><input type="text" name="market_name" value="{{ i.market_name }}" disabled></td>
-                <td><input type="text" name="market_so_far" value="Settled" disabled></td>
-                <td><input type="text" name="bet_stake" value="Settled" disabled></td>
-                <td><input type="text" name="market_sell_price" value="Settled" disabled>
-                    <input type="text" name="market_buy_price" value="Settled" disabled>
-                    <input type="text" name="market_settlement" value="{{ i.market_settlement }}" disabled></td></tr>
-          </form>
+        <section class="">
+          <h2>Betting</h2>
+          Welcome {{ unique_user.username }} to your FootySquadPro Betting page.<br/>
+            <p>Username: {{ unique_user.username }}<br/>
+            Email: {{ unique_user.email }}<br/>
+            Name: {{ unique_user.name }}<br/>
+            Squad Name: {{ squad.squad_name }}<br/>
+            Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}" class="btn badge-pill badge-primary">Manage</a><br/><br/></p>
+        </section>
+        <section class="">
+          <h3>Available Markets</h3>
+          <table>
+            <tr><th>Market</th><th>So Far</th><th>Bet Stake</th><th>Action</th></tr>
+            {% for i in market %}
+            {% if i.market_settlement == None %}
+            <form method="post" action="/betting">
+              <tr><td><input type="text" name="market_name" value="{{ i.market_name }}" readonly></td>
+                  <td><input type="text" name="market_so_far" value="{{ i.market_so_far }}" readonly></td>
+                  <td><input type="text" name="bet_stake" value="" required></td>
+                  <td><input type="text" name="market_sell_price" value="{{ i.market_sell_price }}" readonly>
+                      <input type="text" name="market_buy_price" value="{{ i.market_buy_price }}" readonly>
+                      <input type="submit" value="SELL" name="button" class="btn btn-danger"/><input type="submit" value="BUY" name="button" class="btn btn-success"/></td></tr>
+            </form>
+            {% else %}
+            <form method="post" action="/betting">
+              <tr><td><input type="text" name="market_name" value="{{ i.market_name }}" disabled></td>
+                  <td><input type="text" name="market_so_far" value="Settled" disabled></td>
+                  <td><input type="text" name="bet_stake" value="Settled" disabled></td>
+                  <td><input type="text" name="market_sell_price" value="Settled" disabled>
+                      <input type="text" name="market_buy_price" value="Settled" disabled>
+                      <input type="text" name="market_settlement" value="{{ i.market_settlement }}" disabled></td></tr>
+            </form>
+            {% endif %}
+            {% endfor %}
+          </table>
+        </section>
+        <section class="">
+          {% if bet.count()>0 %}
+          <h3>Bet Summary</h3>
+          <p>A list of bets placed by {{ unique_user.username }} is shown below.</p>
+            {% for i in bet %}
+            {{loop.index}}. €{{ i.bet_stake }} {{ i.bet_action }} of {{ i.bet_market }} @{{ i.bet_price }}.<br/>
+            {% endfor %}
+            <br/>
+            <a href="/betResults?username={{ unique_user.username }} " class="btn btn-primary">Bet Results</a>
           {% endif %}
-          {% endfor %}
-        </table>
-        {% if bet.count()>0 %}
-        <h3>Bet Summary</h3>
-        <p>A list of bets placed by {{ unique_user.username }} is shown below.</p>
-          {% for i in bet %}
-          {{loop.index}}. €{{ i.bet_stake }} {{ i.bet_action }} of {{ i.bet_market }} @{{ i.bet_price }}.<br/>
-          {% endfor %}
-          <br/><a href="/betResults?username={{ unique_user.username }}">Bet Results</a>
-        {% endif %}
+        </section>
       </main>
     </div>
   </body>
