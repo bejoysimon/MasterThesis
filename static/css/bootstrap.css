@@ -196,6 +196,51 @@ figure {
   margin: 0 0 1rem;
 }
 
+.pitch {
+  text-align: center;
+  display: inline-block;
+  width: 80%;
+  float: left;
+  font-weight: bold;
+  font-size: 0.7rem;
+  background-color: rgba(0, 255, 0, 0.5);
+}
+
+.subsec {
+  width: 50%;
+  float: left;
+}
+
+.shiftLeft {
+  float: left;
+}
+
+.shiftRight {
+  float: right;
+}
+
+.bg-opaque {
+  background-image:url("/static/champions.jpg");
+  background-repeat: no-repeat;
+  background-position:center;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.sidebar {
+  width: 20%;
+  float: right;
+  background-color: rgba(0, 0, 255, 0.2);
+}
+
+.caps {
+  text-align: center;
+  display: inline-block;
+  width: 20%;
+  background-color: rgba(255, 0, 0, 0.3);
+  float: left;
+}
+
 img {
   vertical-align: middle;
   border-style: none;

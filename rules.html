@@ -12,7 +12,7 @@
           <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
           <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
           <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
-          <a class="btn btn-danger border" href="/">Logout</a><br/>
+          <a class="btn btn-danger border" href="{{ logout }}">Logout</a><br/>
         </nav>
       </header>
       <main class="border-top">
@@ -28,7 +28,7 @@
           The total value of the squad cannot exceed the budget, which is set to 1000M by default.<br/>
           You can always go back and make changes to your squad until the submission deadline (five minutes before kick-off of the first fixture of the game).<br/><br/>
         </section>
-        <section class="">
+        <section class="border-top">
           <h2>STARTING ELEVEN</h2>
           You must pick a starting eleven from the players in your squad. The following rules apply for the starting eleven:
           <ul>
@@ -38,7 +38,7 @@
             <li>Between 1 and 3 attackers</li>
           </ul><br/>
         </section>
-        <section class="">
+        <section class="border-top">
           <h2>SUBSTITUTES</h2>
           The four remaining players in your squad have to be placed on the substitutes bench.
           These players will be subject to automatic substitutions after the contest or gameweek has ended.
@@ -46,24 +46,24 @@
           The outfield player substitutes must be prioritised for automatic substitutions.
           If the first substitute does not play, or the substitution will lead to an invalid formation, the next in line will be used instead.<br/><br/>
         </section>
-        <section class="">
+        <section class="border-top">
           <h2>CAPTAIN</h2>
           You must also select a captain.
           This player receives double points.
           You must also select a vice-captain, which will replace your selected captain if he doesn’t play.<br/><br/>
         </section>
-        <section class="">
+        <section class="border-top">
           <h2>RESTRICTIONS</h2>
           For all games with more than 2 matches, you cannot select more than a total of three players from the same team.
           For contests with 2 matches, the maximum number of players from the same team is 5.<br/>
           For games with only 1 match, you can select an unlimited number of players from any team.
         </section>
-        <section class="">
+        <section class="border-top">
           <h2>TRANSFERS</h2>
           Some games allow you to make player transfers between rounds.
           The rules for transfers are explained on the game information page of these games.<br/><br/>
         </section>
-        <section class="">
+        <section class="border-top">
           <h2>WILDCARDS</h2>
           Some season long games will allow the use of a wildcard during specified periods.
           The rules for wildcards are explained on the game information page of these games.<br/><br/>

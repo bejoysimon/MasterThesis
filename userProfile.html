@@ -12,7 +12,7 @@
           <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
           <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
           <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
-          <a class="btn btn-danger border " href="/">Logout</a><br/>
+          <a class="btn btn-danger border" href="{{ logout }}">Logout</a><br/>
         </nav>
       </header>
       <main class="border-top">
@@ -24,7 +24,7 @@
             Name: {{ unique_user.name }}<br/>
             Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}" class="btn badge-pill badge-primary" >Manage</a><br/><br/>
         </section>
-        <section class="">
+        <section class="border-top">
           <h3>Squad</h3>
           Every user can have only one squad to bet on FantasySquadPro. Build your squad and enjoy.<br/><br/>
           <form method="post" action="/userProfile">

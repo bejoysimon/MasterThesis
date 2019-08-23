@@ -22,6 +22,7 @@ class UpdateMarkets(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
 
         user = users.get_current_user()
+        logout = users.create_logout_url('/')
 
         username = self.request.get('username')
 
@@ -35,7 +36,7 @@ class UpdateMarkets(webapp2.RequestHandler):
 
         bet = MyBets.query(MyBets.username == username).order(-MyBets.bet_time)
 
-        template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market, 'bet' : bet}
+        template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market, 'bet' : bet, 'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('updateMarkets.html')
         self.response.write(template.render(template_values))
@@ -62,9 +63,6 @@ class UpdateMarkets(webapp2.RequestHandler):
         user_market_key = username + updated_name
         market_key = ndb.Key('BettingMarkets', user_market_key)
         market = market_key.get()
-
-        if action == "Home":
-            self.redirect('/')
 
         if action == "Update":
             user_market_key = username + updated_name

@@ -21,6 +21,7 @@ class AdminPage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
 
         user = users.get_current_user()
+        logout = users.create_logout_url('/')
 
         myuser_key = ndb.Key('MyUser', user.user_id())
         myuser = myuser_key.get()
@@ -28,11 +29,9 @@ class AdminPage(webapp2.RequestHandler):
         admin_key = ndb.Key('UserModel', myuser.username)
         admin_user = admin_key.get()
 
-        # squad_key = ndb.Key('MySquad', myuser.username)
-        # squad = squad_key.get()
         squad = MySquad.query()
 
-        template_values = {'admin_user' : admin_user, 'squad' : squad}
+        template_values = {'admin_user' : admin_user, 'squad' : squad, 'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('adminPage.html')
         self.response.write(template.render(template_values))
@@ -41,9 +40,6 @@ class AdminPage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
 
         action=self.request.get('button')
-
-        if action == "Home":
-            self.redirect('/')
 
         if action == "Add":
             market_id = int(self.request.get("market_id"))

@@ -20,6 +20,8 @@ class BuildSquad(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
 
+        logout = users.create_logout_url('/')
+
         username = self.request.get('username')
 
         unique_key = ndb.Key('UserModel', username)
@@ -43,13 +45,16 @@ class BuildSquad(webapp2.RequestHandler):
                             'gkp' : query_gkp,
                             'def' : query_def,
                             'mid' : query_mid,
-                            'fwd' : query_fwd}
+                            'fwd' : query_fwd,
+                            'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('buildSquad.html')
         self.response.write(template.render(template_values))
 
     def post(self):
         self.response.headers['Content-Type'] = 'text/html'
+
+        logout = users.create_logout_url('/')
 
         user = users.get_current_user()
         myuser_key = ndb.Key('MyUser', user.user_id())
@@ -63,11 +68,9 @@ class BuildSquad(webapp2.RequestHandler):
 
         error1 = '***Invalid Squad! Squad cost over available budget!***'
         error2 = '***Invalid Squad! Same player chosen for different positions!***'
+        error3 = '***Invalid Captain and Vice-Captain!***'
 
         action = self.request.get('button')
-
-        if action == "Logout":
-            self.redirect('/')
 
         if action == "Submit":
             squad_name = self.request.get('squad_name')
@@ -156,36 +159,70 @@ class BuildSquad(webapp2.RequestHandler):
                 def1 != def2 and def1 != def3 and def1 != def4 and def1 != def5 and def2 != def3 and def2 != def4 and def2 != def5 and def3 != def4 and def3 != def5 and def4 != def5 and
                 mid1 != mid2 and mid1 != mid3 and mid1 != mid4 and mid1 != mid5 and mid2 != mid3 and mid2 != mid4 and mid2 != mid5 and mid3 != mid4 and mid3 != mid5 and mid4 != mid5 and
                 fwd1 != fwd2 and fwd2 != fwd3 and fwd1 != fwd3):
-                if total_cost <= 1000:
-                    squad_update = MySquad(id = myuser.username,
-                                            username = myuser.username,
-                                            squad_name = squad_name,
-                                            squad_cost = total_cost,
-                                            gkp1 = gkp1,
-                                            gkp2 = gkp2,
-                                            def1 = def1,
-                                            def2 = def2,
-                                            def3 = def3,
-                                            def4 = def4,
-                                            def5 = def5,
-                                            mid1 = mid1,
-                                            mid2 = mid2,
-                                            mid3 = mid3,
-                                            mid4 = mid4,
-                                            mid5 = mid5,
-                                            fwd1 = fwd1,
-                                            fwd2 = fwd2,
-                                            fwd3 = fwd3,
-                                            captain = captain,
-                                            vice_captain = vice_captain)
-                    squad_update.put()
 
-                    self.redirect('/userProfile?username='+myuser.username)
+                if ((captain == gkp1 or captain == gkp2 or
+                    captain == def1 or captain == def2 or captain == def3 or captain == def4 or captain == def5 or
+                    captain == mid1 or captain == mid2 or captain == mid3 or captain == mid4 or captain == mid5 or
+                    captain == fwd1 or captain == fwd2 or captain == fwd3) and
+                    (vice_captain == gkp1 or vice_captain == gkp2 or
+                    vice_captain == def1 or vice_captain == def2 or vice_captain == def3 or vice_captain == def4 or vice_captain == def5 or
+                    vice_captain == mid1 or vice_captain == mid2 or vice_captain == mid3 or vice_captain == mid4 or vice_captain == mid5 or
+                    vice_captain == fwd1 or vice_captain == fwd2 or vice_captain == fwd3) and (captain != vice_captain)):
+
+                    if total_cost <= 1000:
+                        squad_update = MySquad(id = myuser.username,
+                                                username = myuser.username,
+                                                squad_name = squad_name,
+                                                squad_cost = total_cost,
+                                                gkp1 = gkp1,
+                                                gkp2 = gkp2,
+                                                def1 = def1,
+                                                def2 = def2,
+                                                def3 = def3,
+                                                def4 = def4,
+                                                def5 = def5,
+                                                mid1 = mid1,
+                                                mid2 = mid2,
+                                                mid3 = mid3,
+                                                mid4 = mid4,
+                                                mid5 = mid5,
+                                                fwd1 = fwd1,
+                                                fwd2 = fwd2,
+                                                fwd3 = fwd3,
+                                                captain = captain,
+                                                vice_captain = vice_captain)
+                        squad_update.put()
+
+                        self.redirect('/userProfile?username='+myuser.username)
+                    else:
+                        self.response.write(error1)
+
+                        img = '/static/blank_player_pic.png'
+
+                        query_all = PlayersData.query()
+                        query_gkp = PlayersData.query(PlayersData.position == 'GKP')
+                        query_def = PlayersData.query(PlayersData.position == 'DEF')
+                        query_mid = PlayersData.query(PlayersData.position == 'MID')
+                        query_fwd = PlayersData.query(PlayersData.position == 'FWD')
+
+                        template_values = {'unique_user' : unique_user,
+                                            'img' : img,
+                                            'squad' : squad,
+                                            'all' : query_all,
+                                            'gkp' : query_gkp,
+                                            'def' : query_def,
+                                            'mid' : query_mid,
+                                            'fwd' : query_fwd,
+                                            'logout' : logout}
+
+                        template = JINJA_ENVIRONMENT.get_template('buildSquad.html')
+                        self.response.write(template.render(template_values))
                 else:
-                    self.response.write(error1)
+                    self.response.write(error3)
 
                     img = '/static/blank_player_pic.png'
 
+                    query_all = PlayersData.query()
                     query_gkp = PlayersData.query(PlayersData.position == 'GKP')
                     query_def = PlayersData.query(PlayersData.position == 'DEF')
                     query_mid = PlayersData.query(PlayersData.position == 'MID')
@@ -194,10 +231,12 @@ class BuildSquad(webapp2.RequestHandler):
                     template_values = {'unique_user' : unique_user,
                                         'img' : img,
                                         'squad' : squad,
+                                        'all' : query_all,
                                         'gkp' : query_gkp,
                                         'def' : query_def,
                                         'mid' : query_mid,
-                                        'fwd' : query_fwd}
+                                        'fwd' : query_fwd,
+                                        'logout' : logout}
 
                     template = JINJA_ENVIRONMENT.get_template('buildSquad.html')
                     self.response.write(template.render(template_values))
@@ -206,6 +245,7 @@ class BuildSquad(webapp2.RequestHandler):
 
                 img = '/static/blank_player_pic.png'
 
+                query_all = PlayersData.query()
                 query_gkp = PlayersData.query(PlayersData.position == 'GKP')
                 query_def = PlayersData.query(PlayersData.position == 'DEF')
                 query_mid = PlayersData.query(PlayersData.position == 'MID')
@@ -214,10 +254,12 @@ class BuildSquad(webapp2.RequestHandler):
                 template_values = {'unique_user' : unique_user,
                                     'img' : img,
                                     'squad' : squad,
+                                    'all' : query_all,
                                     'gkp' : query_gkp,
                                     'def' : query_def,
                                     'mid' : query_mid,
-                                    'fwd' : query_fwd}
+                                    'fwd' : query_fwd,
+                                    'logout' : logout}
 
                 template = JINJA_ENVIRONMENT.get_template('buildSquad.html')
                 self.response.write(template.render(template_values))

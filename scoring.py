@@ -18,12 +18,14 @@ class Scoring(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
 
+        logout = users.create_logout_url('/')
+
         username = self.request.get('username')
 
         unique_key = ndb.Key('UserModel', username)
         unique_user = unique_key.get()
 
-        template_values = {'unique_user' : unique_user}
+        template_values = {'unique_user' : unique_user, 'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('scoring.html')
         self.response.write(template.render(template_values))

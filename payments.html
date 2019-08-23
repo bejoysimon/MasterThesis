@@ -12,7 +12,7 @@
           <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
           <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
           <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
-          <a class="btn btn-danger border" href="/">Logout</a><br/>
+          <a class="btn btn-danger border" href="{{ logout }}">Logout</a><br/>
         </nav>
       </header>
       <main class="border-top">
@@ -25,18 +25,18 @@
           Name: {{ unique_user.name }}<br/>
           Account Balance: {{ unique_user.balance }}<br/><br/>
         </section>
-        <section class="">
+        <section class="subsec border-top">
           <h4>DEPOSIT</h4>
           <form method="post" action="/payments">
             <p>Please deposit by providing card details below.</p>
             <p>Card Number: <input type="text" name="cardNo" value="" required></p>
             <p>Name on card: <input type="text" name="cardName" value="" required></p>
             <p>Valid through: <input type="month" name="cardExpiry" value="" required></p>
-            <p>CVV: <input type="text" name="cardCVV" value="" required></p>
-            <input type="submit" value="Deposit" name="button"/><br/><br/>
+            <p>CVV: <input type="text" name="cardCVV" value="" required></p><br/>
+            <input type="submit" value="Deposit" name="button" class="btn btn-primary"/><br/><br/>
           </form>
         </section>
-        <section class="">
+        <section class="subsec border-top">
           <h4>WITHDRAWAL</h4>
           <form method="post" action="/payments">
             <p>Please request for withdrawal by providing bank details below.</p>
@@ -44,8 +44,8 @@
             <p>IBAN: <input type="text" name="iban" value="" required></p>
             <p>Sort Code: <input type="text" name="sortCode" value="" required></p>
             <p>BIC/Swift Code: <input type="text" name="bicSwift" value="" required></p>
-            <p>Bank Address: <input type="text" name="address" value="" required></p>
-            <input type="submit" value="Withdraw" name="button"/>
+            <p>Bank Address: <input type="text" name="address" value="" required></p><br/>
+            <input type="submit" value="Withdraw" name="button" class="btn btn-primary"/>
           </form>
         </section>
       </main>

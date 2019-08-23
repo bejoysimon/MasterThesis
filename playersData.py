@@ -22,5 +22,3 @@ class PlayersData(ndb.Model):
     minutes = ndb.IntegerProperty(default=0)
     bonus = ndb.IntegerProperty(default=0)
     points = ndb.IntegerProperty(default=0)
-
-    # tweets_list = ndb.StructuredProperty(TweetsModel, repeated=True)

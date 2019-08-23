@@ -12,7 +12,7 @@
           <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
           <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
           <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
-          <a class="btn btn-danger border" href="/">Logout</a><br/>
+          <a class="btn btn-danger border" href="{{ logout }}">Logout</a><br/>
         </nav>
       </header>
       <main class="border-top">
@@ -25,9 +25,9 @@
             Squad Name: {{ squad.squad_name }}<br/>
             Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}" class="btn badge-pill badge-primary">Manage</a><br/><br/></p>
         </section>
-        <section class="">
+        <section class="border-top">
           <h3>Available Markets</h3>
-          <table>
+          <table class="table">
             <tr><th>Market</th><th>So Far</th><th>Bet Stake</th><th>Action</th></tr>
             {% for i in market %}
             {% if i.market_settlement == None %}
@@ -52,7 +52,7 @@
             {% endfor %}
           </table>
         </section>
-        <section class="">
+        <section class="border-top">
           {% if bet.count()>0 %}
           <h3>Bet Summary</h3>
           <p>A list of bets placed by {{ unique_user.username }} is shown below.</p>

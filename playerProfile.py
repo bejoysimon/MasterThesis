@@ -20,6 +20,8 @@ class PlayerProfile(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
 
+        logout = users.create_logout_url('/')
+
         username = self.request.get('username')
 
         unique_key = ndb.Key('UserModel', username)
@@ -31,7 +33,7 @@ class PlayerProfile(webapp2.RequestHandler):
 
         img = '/static/Aguero.png'
 
-        template_values = {'unique_user' : unique_user, 'player' : playerData, 'img' : img}
+        template_values = {'unique_user' : unique_user, 'player' : playerData, 'img' : img, 'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('playerProfile.html')
         self.response.write(template.render(template_values))

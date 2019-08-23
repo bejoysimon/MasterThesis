@@ -12,7 +12,7 @@
           <a class="btn btn-danger border" href="/scoring?username={{ unique_user.username }}">Scoring System</a>
           <a class="btn btn-danger border" href="/rules?username={{ unique_user.username }}">Game Rules</a>
           <a class="btn btn-danger border" href="/playerStats?username={{ unique_user.username }}">Player Statistics</a>
-          <a class="btn btn-danger border" href="/">Logout</a><br/>
+          <a class="btn btn-danger border" href="{{ logout }}">Logout</a><br/>
         </nav>
       </header>
       <main class="border-top">
@@ -25,7 +25,7 @@
           Squad Name: {{ squad.squad_name }}<br/>
           Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}" class="btn badge-pill badge-primary">Manage</a>
         </section>
-        <section class="">
+        <section class="border-top">
           {% if bet.count()>0 %}
           <h3>Bet Summary</h3>
           <p>A list of bets placed by {{ unique_user.username }} is shown below.</p>
@@ -34,27 +34,27 @@
             {% endfor %}
           {% endif %}
         </section>
-        <section class="">
-          <h3>Settled Bets</h3>
-            {% for i in bet %}
-            {% if i.bet_settlement != None %}
-            <form>
-              <input type="text" name="bet_market" value="{{ i.bet_market }}" readonly>
-              <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" readonly>
-              <input type="text" name="bet_action" value="{{ i.bet_action }}" readonly>
-              <input type="text" name="bet_settlement" value="Settled @{{ i.bet_settlement }}" readonly>
-            </form><br/>
-            {% endif %}
-            {% endfor %}
-        </section>
-        <section class="">
+        <section class="subsec border-top">
           <h3>Open Bets</h3>
             {% for i in bet %}
             {% if i.bet_settlement == None %}
             <form>
-              <input type="text" name="bet_market" value="{{ i.bet_market }}" readonly>
-              <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" readonly>
-              <input type="text" name="bet_action" value="{{ i.bet_action }} @{{ i.bet_price }}" readonly>
+              <input type="text" name="bet_market" value="{{ i.bet_market }}" style="width:150px;" readonly>
+              <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" style="width:150px;" readonly>
+              <input type="text" name="bet_action" value="{{ i.bet_action }} @{{ i.bet_price }}" style="width:150px;" readonly>
+            </form><br/>
+            {% endif %}
+            {% endfor %}
+        </section>
+        <section class="subsec border-top">
+          <h3>Settled Bets</h3>
+            {% for i in bet %}
+            {% if i.bet_settlement != None %}
+            <form>
+              <input type="text" name="bet_market" value="{{ i.bet_market }}" style="width:150px;" readonly>
+              <input type="text" name="bet_stakes" value="{{ i.bet_stake }}" style="width:150px;" readonly>
+              <input type="text" name="bet_action" value="{{ i.bet_action }}" style="width:150px;" readonly>
+              <input type="text" name="bet_settlement" value="Settled @{{ i.bet_settlement }}" style="width:150px;" readonly>
             </form><br/>
             {% endif %}
             {% endfor %}

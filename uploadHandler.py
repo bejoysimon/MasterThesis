@@ -65,4 +65,4 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
                         playerData.put()
                         row_count += 1
 
-        self.redirect('/addPlayersData')
+        self.redirect('/adminPage')

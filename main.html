@@ -12,7 +12,7 @@
           <a class="btn btn-danger border " href="/">Scoring System</a>
           <a class="btn btn-danger border " href="/">Game Rules</a>
           <a class="btn btn-danger border " href="/">Player Statistics</a>
-          <a class="btn btn-danger border " href="{{ url }}">Logout</a><br/>
+          <a class="btn btn-danger border " href="{{ logout }}">Logout</a><br/>
         </nav>
       </header>
       <main class="border-top">
@@ -23,14 +23,15 @@
             {% if admin %}
             <a href="/adminPage" class="btn badge-pill badge-primary">Admin Page</a><br/><br/>
             {% else %}
-            <a href="/userSignUp" class="btn badge-pill badge-primary">Sign In / Register</a><br/>
+            <a href="/userSignUp" class="btn badge-pill badge-primary">Enter / Create Username</a><br/>
             <br/>
             {% endif %}
           {% else %}
           <p>Hello guest, welcome to FootySquadPro!</p>
-          {% endif %}
           <p>You can {{ url_string }} <a href='{{ url }}' class="btn badge-pill badge-primary">here.</a></p>
+          {% endif %}
         </section>
+        <!-- <img class="" src="{{ img }}" alt="Champions 2019/20"> -->
       </main>
     </div>
   </body>

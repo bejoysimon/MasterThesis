@@ -21,6 +21,7 @@ class AddMarkets(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
 
         user = users.get_current_user()
+        logout = users.create_logout_url('/')
 
         username = self.request.get('username')
 
@@ -32,13 +33,15 @@ class AddMarkets(webapp2.RequestHandler):
 
         market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 
-        template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market}
+        template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market, 'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('addMarkets.html')
         self.response.write(template.render(template_values))
 
     def post(self):
         self.response.headers['Content-Type'] = 'text/html'
+
+        logout = users.create_logout_url('/')
 
         action=self.request.get('button')
 
@@ -59,9 +62,6 @@ class AddMarkets(webapp2.RequestHandler):
         market_key = ndb.Key('BettingMarkets', user_market_key)
         market = market_key.get()
 
-        if action == "Home":
-            self.redirect('/')
-
         if action == "Add":
             if market == None:
                 add_market = BettingMarkets(id = user_market_key,
@@ -79,7 +79,7 @@ class AddMarkets(webapp2.RequestHandler):
 
                 market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 
-                template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market}
+                template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market, 'logout' : logout}
 
                 template = JINJA_ENVIRONMENT.get_template('addMarkets.html')
                 self.response.write(template.render(template_values))

@@ -42,7 +42,10 @@ class MainPage(webapp2.RequestHandler):
         url_string = ''
         welcome = 'Welcome back'
 
+        img = '/static/champions.jpg'
+
         user = users.get_current_user()
+        logout = users.create_logout_url('/')
         admin = False
 
         if user:
@@ -78,13 +81,13 @@ class MainPage(webapp2.RequestHandler):
             url_string = 'login'
 
 
-        template_values = {
-            'url' : url,
-            'url_string' : url_string,
-            'user' : user,
-            'admin' : admin,
-            'welcome' : welcome,
-        }
+        template_values = {'url' : url,
+                            'url_string' : url_string,
+                            'user' : user,
+                            'admin' : admin,
+                            'img' : img,
+                            'welcome' : welcome,
+                            'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('main.html')
         self.response.write(template.render(template_values))

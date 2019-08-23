@@ -12,7 +12,7 @@
           <a class="btn btn-danger border" href="/addMarkets?username={{ unique_user.username }}">Scoring System</a>
           <a class="btn btn-danger border" href="/addMarkets?username={{ unique_user.username }}">Game Rules</a>
           <a class="btn btn-danger border" href="/addMarkets?username={{ unique_user.username }}">Player Statistics</a>
-          <a class="btn btn-danger border" href="/">Logout</a><br/>
+          <a class="btn btn-danger border" href="{{ logout }}">Logout</a><br/>
         </nav>
       </header>
       <main class="border-top">
@@ -20,11 +20,12 @@
           <h3>Squad Details</h3>
           Username: {{ unique_user.username }}<br/>
           Email: {{ unique_user.email }}<br/>
-          Name: {{ unique_user.name }}<br/>
+          Name: {{ unique_user.name }}<br/><br/>
+          Squad Name: {{ squad.squad_name }}<br/>
           Account Balance: {{ unique_user.balance }}<br/><br/>
         </section>
-        <aside class="">
-          <h3>Line-Up for {{ squad.squad_name }}</h3>
+        <aside class="sidebar border-top">
+          <h3>Line-Up</h3>
           <h4>Starting Eleven</h4>
             <p>{{ squad.gkp1 }}(GK)<br/>
             {{ squad.def1 }}<br/>
@@ -43,16 +44,16 @@
             {{ squad.mid5 }}<br/>
             {{ squad.fwd3 }}<br/></p>
         </aside>
-        <section class="">
+        <section class="border-top">
           <h3>Add Betting Markets</h3>
           <form method="post" action="/addMarkets">
             Add betting markets for {{ unique_user.username }}<br/><br/>
-            <input type="text" name="username" value="{{ unique_user.username }}" readonly>
-            <input type="text" name="squad_name" value="{{ squad.squad_name }}" readonly>
-            <input type="text" name="market_name" value="" placeholder="Market Name" required>
-            <input type="text" name="market_so_far" value="" placeholder="Market So Far" required>
-            <input type="text" name="market_sell_price" value="" placeholder="Market Sell Price" required>
-            <input type="text" name="market_buy_price" value="" placeholder="Market Buy Price" required>
+            <input type="text" name="username" value="{{ unique_user.username }}" style="width:150px;" readonly>
+            <input type="text" name="squad_name" value="{{ squad.squad_name }}" style="width:150px;" readonly>
+            <input type="text" name="market_name" value="" placeholder="Market Name" style="width:150px;" required>
+            <input type="text" name="market_so_far" value="" placeholder="Market So Far" style="width:150px;" required>
+            <input type="text" name="market_sell_price" value="" placeholder="Market Sell Price" style="width:150px;" required>
+            <input type="text" name="market_buy_price" value="" placeholder="Market Buy Price" style="width:150px;" required>
             <input type="submit" value="Add" name="button" class="btn btn-primary"/><br/>
           </form>
         </section>

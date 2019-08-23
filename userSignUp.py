@@ -19,13 +19,14 @@ class UserSignUp(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
 
         user = users.get_current_user()
+        logout = users.create_logout_url('/')
 
         myuser_key = ndb.Key('MyUser', user.user_id())
         myuser = myuser_key.get()
 
         actual_username = myuser.username
 
-        template_values = {'actual_username' : actual_username}
+        template_values = {'actual_username' : actual_username, 'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('userSignUp.html')
         self.response.write(template.render(template_values))
@@ -34,10 +35,9 @@ class UserSignUp(webapp2.RequestHandler):
     def post(self):
         self.response.headers['Content-Type'] = 'text/html'
 
-        action=self.request.get('button')
+        logout = users.create_logout_url('/')
 
-        if action == "Home":
-            self.redirect('/')
+        action=self.request.get('button')
 
         if action == 'Submit':
             user = users.get_current_user()
@@ -83,10 +83,9 @@ class UserSignUp(webapp2.RequestHandler):
                 self.response.write('***Username Exists. Please choose another!***')
 
 
-        template_values = {
-            'username' : username,
-            'actual_username' : actual_username
-        }
+        template_values = {'username' : username,
+                            'actual_username' : actual_username,
+                            'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('userSignUp.html')
         self.response.write(template.render(template_values))
