@@ -7,6 +7,7 @@ class MyBets(ndb.Model):
     username = ndb.StringProperty()
     squad_name = ndb.StringProperty()
     bet_market = ndb.StringProperty()
+    bet_at_so_far = ndb.IntegerProperty()
     bet_action = ndb.StringProperty()
     bet_price = ndb.FloatProperty()
     bet_stake = ndb.FloatProperty()

@@ -23,7 +23,7 @@
             Email: {{ unique_user.email }}<br/>
             Name: {{ unique_user.name }}<br/>
             Squad Name: {{ squad.squad_name }}<br/>
-            Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}" class="btn badge-pill badge-primary">Manage</a><br/><br/></p>
+            Account Balance: {{ unique_user.balance }} <a href="/payments?username={{ unique_user.username }}" class="btn badge-pill badge-primary">Manage</a><br/><br/></p>
         </section>
         <section class="border-top">
           <h3>Available Markets</h3>
@@ -60,7 +60,7 @@
             {{loop.index}}. €{{ i.bet_stake }} {{ i.bet_action }} of {{ i.bet_market }} @{{ i.bet_price }}.<br/>
             {% endfor %}
             <br/>
-            <a href="/betResults?username={{ unique_user.username }} " class="btn btn-primary">Bet Results</a>
+            <a href="/betResults?username={{ unique_user.username }}" class="btn btn-primary">Bet Results</a>
           {% endif %}
         </section>
       </main>

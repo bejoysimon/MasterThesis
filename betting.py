@@ -74,6 +74,7 @@ class Betting(webapp2.RequestHandler):
                 add_bet = MyBets(username = myuser.username,
                                 squad_name = squad.squad_name,
                                 bet_market = market_name,
+                                bet_at_so_far = market_so_far,
                                 bet_action = action,
                                 bet_price = market_buy_price,
                                 bet_stake = bet_stake)
@@ -99,16 +100,17 @@ class Betting(webapp2.RequestHandler):
             market_sell_price = float(self.request.get('market_sell_price'))
             balance = unique_user.balance
 
-            bet_margin = (2 * market_sell_price) * bet_stake
+            bet_margin = ((2 * market_sell_price) - market_so_far) * bet_stake
 
             if bet_margin < balance:
-                balance = unique_user.balance - bet_margin
-                unique_user.balance = balance
-                unique_user.put()
+                # balance = unique_user.balance - bet_margin
+                # unique_user.balance = balance
+                # unique_user.put()
 
                 add_bet = MyBets(username = myuser.username,
                                 squad_name = squad.squad_name,
                                 bet_market = market_name,
+                                bet_at_so_far = market_so_far,
                                 bet_action = action,
                                 bet_price = market_sell_price,
                                 bet_stake = bet_stake)

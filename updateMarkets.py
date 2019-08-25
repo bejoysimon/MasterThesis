@@ -69,29 +69,46 @@ class UpdateMarkets(webapp2.RequestHandler):
             market_key = ndb.Key('BettingMarkets', user_market_key)
             market = market_key.get()
 
+            bet = MyBets.query(MyBets.username == username and MyBets.bet_market == updated_name)
+
+            if len(market_settlement) != 0:
+                if bet.count()>0:
+                    for i in bet:
+                        i.bet_settlement = int(market_settlement)
+                        i.put()
+
+                        if i.bet_action == "BUY":
+                            # excess_margin = (i.bet_price - i.bet_at_so_far) * i.bet_stake
+                            amount = (i.bet_settlement - i.bet_price) * i.bet_stake
+                            unique_user.balance = (unique_user.balance + amount) + excess_margin
+                            unique_user.put()
+
+                        if i.bet_action == "SELL":
+                            amount = (i.bet_price - i.bet_settlement) * i.bet_stake
+                            unique_user.balance = unique_user.balance + amount
+                            unique_user.put()
+
+
+            if (updated_so_far != 0) and (len(market_settlement) == 0):
+                if bet.count()>0:
+                    for i in bet:
+                        if i.bet_action == "BUY":
+                            bet_margin = (updated_so_far - market.market_so_far) * i.bet_stake
+                            unique_user.balance = unique_user.balance + bet_margin
+                            unique_user.put()
+
+                        if i.bet_action == "SELL":
+                            bet_margin = (updated_so_far - market.market_so_far) * i.bet_stake
+                            unique_user.balance = unique_user.balance - bet_margin
+                            unique_user.put()
+
+
             market.market_so_far = updated_so_far
             market.market_sell_price = updated_sell_price
             market.market_buy_price = updated_buy_price
-            if market_settlement != 'None':
+            if len(market_settlement) != 0:
                 market.market_settlement = int(market_settlement)
             market.put()
-
-            bet = MyBets.query(MyBets.username == username and MyBets.bet_market == updated_name)
-
-            if bet.count()>0:
-                for i in bet:
-                    i.bet_settlement = int(market_settlement)
-                    i.put()
-
-                    if i.bet_action == "BUY":
-                        amount = (i.bet_settlement - i.bet_price) * i.bet_stake
-                        unique_user.balance = unique_user.balance + amount
-                        unique_user.put()
-
-                    if i.bet_action == "SELL":
-                        amount = (i.bet_price - i.bet_settlement) * i.bet_stake
-                        unique_user.balance = unique_user.balance + amount
-                        unique_user.put()
 
 
             self.redirect('/updateMarkets?username='+username)
