@@ -31,7 +31,7 @@
             <tr><th>Market</th><th>So Far</th><th>Bet Stake</th><th>Action</th></tr>
             {% for i in market %}
             {% if i.market_settlement == None %}
-            <form method="post" action="/betting">
+            <form method="post" action="/betting?username={{ unique_user.username }}">
               <tr><td><input type="text" name="market_name" value="{{ i.market_name }}" readonly></td>
                   <td><input type="text" name="market_so_far" value="{{ i.market_so_far }}" readonly></td>
                   <td><input type="text" name="bet_stake" value="" required></td>

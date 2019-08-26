@@ -45,14 +45,16 @@ class Betting(webapp2.RequestHandler):
 
         logout = users.create_logout_url('/')
 
-        user = users.get_current_user()
-        myuser_key = ndb.Key('MyUser', user.user_id())
-        myuser = myuser_key.get()
+        username = self.request.get('username')
 
-        unique_key = ndb.Key('UserModel', myuser.username)
+        # user = users.get_current_user()
+        # myuser_key = ndb.Key('MyUser', user.user_id())
+        # myuser = myuser_key.get()
+
+        unique_key = ndb.Key('UserModel', username)
         unique_user = unique_key.get()
 
-        squad_key = ndb.Key('MySquad', myuser.username)
+        squad_key = ndb.Key('MySquad', username)
         squad = squad_key.get()
 
         action = self.request.get('button')
@@ -71,7 +73,7 @@ class Betting(webapp2.RequestHandler):
                 unique_user.balance = balance
                 unique_user.put()
 
-                add_bet = MyBets(username = myuser.username,
+                add_bet = MyBets(username = username,
                                 squad_name = squad.squad_name,
                                 bet_market = market_name,
                                 bet_at_so_far = market_so_far,
@@ -80,13 +82,13 @@ class Betting(webapp2.RequestHandler):
                                 bet_stake = bet_stake)
                 add_bet.put()
 
-                self.redirect('/betting?username='+myuser.username)
+                self.redirect('/betting?username='+username)
             else:
                 self.response.write("***Insufficient Balance!***")
 
-                market = BettingMarkets.query(BettingMarkets.username == myuser.username).order(BettingMarkets.market_name)
+                market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 
-                bet = MyBets.query(MyBets.username == myuser.username).order(-MyBets.bet_time)
+                bet = MyBets.query(MyBets.username == username).order(-MyBets.bet_time)
 
                 template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market, 'bet' : bet, 'logout' : logout}
 
@@ -107,7 +109,7 @@ class Betting(webapp2.RequestHandler):
                 # unique_user.balance = balance
                 # unique_user.put()
 
-                add_bet = MyBets(username = myuser.username,
+                add_bet = MyBets(username = username,
                                 squad_name = squad.squad_name,
                                 bet_market = market_name,
                                 bet_at_so_far = market_so_far,
@@ -116,13 +118,13 @@ class Betting(webapp2.RequestHandler):
                                 bet_stake = bet_stake)
                 add_bet.put()
 
-                self.redirect('/betting?username='+myuser.username)
+                self.redirect('/betting?username='+username)
             else:
                 self.response.write("***Insufficient Balance!***")
 
-                market = BettingMarkets.query(BettingMarkets.username == myuser.username).order(BettingMarkets.market_name)
+                market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 
-                bet = MyBets.query(MyBets.username == myuser.username).order(-MyBets.bet_time)
+                bet = MyBets.query(MyBets.username == username).order(-MyBets.bet_time)
 
                 template_values = {'unique_user' : unique_user, 'squad' : squad, 'market' : market, 'bet' : bet, 'logout' : logout}
 

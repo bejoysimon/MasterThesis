@@ -27,7 +27,7 @@
         <section class="border-top">
           <h3>Squad</h3>
           Every user can have only one squad to bet on FantasySquadPro. Build your squad and enjoy.<br/><br/>
-          <form method="post" action="/userProfile">
+          <form method="post" action="/userProfile?username={{ unique_user.username }}">
             {% if squad %}
             My Squad : {{ squad.squad_name }}
             <input type="submit" value="Edit Squad" name="button" class="btn btn-primary"/>

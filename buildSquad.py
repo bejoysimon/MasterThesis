@@ -56,14 +56,16 @@ class BuildSquad(webapp2.RequestHandler):
 
         logout = users.create_logout_url('/')
 
-        user = users.get_current_user()
-        myuser_key = ndb.Key('MyUser', user.user_id())
-        myuser = myuser_key.get()
+        username = self.request.get('username')
 
-        unique_key = ndb.Key('UserModel', myuser.username)
+        # user = users.get_current_user()
+        # myuser_key = ndb.Key('MyUser', user.user_id())
+        # myuser = myuser_key.get()
+
+        unique_key = ndb.Key('UserModel', username)
         unique_user = unique_key.get()
 
-        squad_key = ndb.Key('MySquad', myuser.username)
+        squad_key = ndb.Key('MySquad', username)
         squad = squad_key.get()
 
         error1 = '***Invalid Squad! Squad cost over available budget!***'
@@ -170,8 +172,8 @@ class BuildSquad(webapp2.RequestHandler):
                     vice_captain == fwd1 or vice_captain == fwd2 or vice_captain == fwd3) and (captain != vice_captain)):
 
                     if total_cost <= 1000:
-                        squad_update = MySquad(id = myuser.username,
-                                                username = myuser.username,
+                        squad_update = MySquad(id = username,
+                                                username = username,
                                                 squad_name = squad_name,
                                                 squad_cost = total_cost,
                                                 gkp1 = gkp1,
@@ -193,7 +195,7 @@ class BuildSquad(webapp2.RequestHandler):
                                                 vice_captain = vice_captain)
                         squad_update.put()
 
-                        self.redirect('/userProfile?username='+myuser.username)
+                        self.redirect('/userProfile?username='+username)
                     else:
                         self.response.write(error1)
 

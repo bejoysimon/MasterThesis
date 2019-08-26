@@ -30,14 +30,14 @@ class Payments(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('payments.html')
         self.response.write(template.render(template_values))
 
-    def post(self):
-        self.response.headers['Content-Type'] = 'text/html'
-
-        user = users.get_current_user()
-        myuser_key = ndb.Key('MyUser', user.user_id())
-        myuser = myuser_key.get()
-
-        unique_key = ndb.Key('UserModel', myuser.username)
-        unique_user = unique_key.get()
-
-        action = self.request.get('button')
+    # def post(self):
+    #     self.response.headers['Content-Type'] = 'text/html'
+    #
+    #     user = users.get_current_user()
+    #     myuser_key = ndb.Key('MyUser', user.user_id())
+    #     myuser = myuser_key.get()
+    #
+    #     unique_key = ndb.Key('UserModel', myuser.username)
+    #     unique_user = unique_key.get()
+    #
+    #     action = self.request.get('button')

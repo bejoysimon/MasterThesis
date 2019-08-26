@@ -20,7 +20,7 @@
           <h2>Player Statistics</h2>
           Welcome {{ unique_user.username }} to Player Statistics page.<br/><br/>
           View player statistics by their playing position. Choose a position below:<br/><br/>
-          <form class="form-control" method="post" action="/playerStats">
+          <form class="form-control" method="post" action="/playerStats?username={{ unique_user.username }}">
             <input type="radio" name="position" value="GKP" required>Goalkeepers
             <input type="radio" name="position" value="DEF" required>Defenders
             <input type="radio" name="position" value="MID" required>Midfielders
