@@ -79,7 +79,8 @@ class Betting(webapp2.RequestHandler):
                                 bet_at_so_far = market_so_far,
                                 bet_action = action,
                                 bet_price = market_buy_price,
-                                bet_stake = bet_stake)
+                                bet_stake = bet_stake,
+                                bet_margin = bet_margin)
                 add_bet.put()
 
                 self.redirect('/betting?username='+username)
@@ -115,7 +116,8 @@ class Betting(webapp2.RequestHandler):
                                 bet_at_so_far = market_so_far,
                                 bet_action = action,
                                 bet_price = market_sell_price,
-                                bet_stake = bet_stake)
+                                bet_stake = bet_stake,
+                                bet_margin = bet_margin)
                 add_bet.put()
 
                 self.redirect('/betting?username='+username)

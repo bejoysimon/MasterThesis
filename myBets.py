@@ -11,5 +11,6 @@ class MyBets(ndb.Model):
     bet_action = ndb.StringProperty()
     bet_price = ndb.FloatProperty()
     bet_stake = ndb.FloatProperty()
+    bet_margin = ndb.FloatProperty()
     bet_time = ndb.DateTimeProperty(auto_now = True)
     bet_settlement = ndb.IntegerProperty()

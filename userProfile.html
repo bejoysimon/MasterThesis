@@ -22,7 +22,8 @@
             Username: {{ unique_user.username }}<br/>
             Email: {{ unique_user.email }}<br/>
             Name: {{ unique_user.name }}<br/>
-            Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}" class="btn badge-pill badge-primary" >Manage</a><br/><br/>
+            Account Balance: {{ unique_user.balance }}  <a href="/payments?username={{ unique_user.username }}" class="btn badge-pill badge-primary" >Manage</a><br/>
+            Margin Balance: {{ unique_user.margin }} <br/><br/>
         </section>
         <section class="border-top">
           <h3>Squad</h3>

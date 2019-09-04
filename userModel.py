@@ -5,3 +5,4 @@ class UserModel(ndb.Model):
     username = ndb.StringProperty()
     name = ndb.StringProperty()
     balance = ndb.FloatProperty(default=100.00)
+    margin = ndb.FloatProperty(default=100.00)

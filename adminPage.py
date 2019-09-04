@@ -26,12 +26,14 @@ class AdminPage(webapp2.RequestHandler):
         myuser_key = ndb.Key('MyUser', user.user_id())
         myuser = myuser_key.get()
 
-        admin_key = ndb.Key('UserModel', myuser.username)
-        admin_user = admin_key.get()
+        unique_key = ndb.Key('UserModel', myuser.username)
+        unique_user = unique_key.get()
+
+        total_users = UserModel.query(UserModel.username != 'admin')
 
         squad = MySquad.query()
 
-        template_values = {'admin_user' : admin_user, 'squad' : squad, 'logout' : logout}
+        template_values = {'total_users' : total_users, 'squad' : squad, 'logout' : logout}
 
         template = JINJA_ENVIRONMENT.get_template('adminPage.html')
         self.response.write(template.render(template_values))
