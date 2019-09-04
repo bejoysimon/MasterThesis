@@ -65,12 +65,13 @@ class Betting(webapp2.RequestHandler):
             bet_stake = float(self.request.get('bet_stake'))
             market_buy_price = float(self.request.get('market_buy_price'))
             balance = unique_user.balance
+            margin_balance = unique_user.margin
 
             bet_margin = (market_buy_price - market_so_far) * bet_stake
 
-            if bet_margin < balance:
-                balance = unique_user.balance - bet_margin
-                unique_user.balance = balance
+            if bet_margin < margin_balance:
+                margin_balance = unique_user.margin - bet_margin
+                unique_user.margin = margin_balance
                 unique_user.put()
 
                 add_bet = MyBets(username = username,
@@ -85,7 +86,7 @@ class Betting(webapp2.RequestHandler):
 
                 self.redirect('/betting?username='+username)
             else:
-                self.response.write("***Insufficient Balance!***")
+                self.response.write("***Insufficient Margin Balance!***")
 
                 market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 
@@ -102,13 +103,14 @@ class Betting(webapp2.RequestHandler):
             bet_stake = float(self.request.get('bet_stake'))
             market_sell_price = float(self.request.get('market_sell_price'))
             balance = unique_user.balance
+            margin_balance = unique_user.margin
 
             bet_margin = ((2 * market_sell_price) - market_so_far) * bet_stake
 
-            if bet_margin < balance:
-                # balance = unique_user.balance - bet_margin
-                # unique_user.balance = balance
-                # unique_user.put()
+            if bet_margin < margin_balance:
+                margin_balance = unique_user.margin - bet_margin
+                unique_user.margin = margin_balance
+                unique_user.put()
 
                 add_bet = MyBets(username = username,
                                 squad_name = squad.squad_name,
@@ -122,7 +124,7 @@ class Betting(webapp2.RequestHandler):
 
                 self.redirect('/betting?username='+username)
             else:
-                self.response.write("***Insufficient Balance!***")
+                self.response.write("***Insufficient Margin Balance!***")
 
                 market = BettingMarkets.query(BettingMarkets.username == username).order(BettingMarkets.market_name)
 

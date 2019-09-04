@@ -78,28 +78,32 @@ class UpdateMarkets(webapp2.RequestHandler):
                         i.put()
 
                         if i.bet_action == "BUY":
-                            excess_margin = (i.bet_price - i.bet_at_so_far) * i.bet_stake
+                            # excess_margin = (i.bet_price - i.bet_at_so_far) * i.bet_stake
                             amount = (i.bet_settlement - i.bet_price) * i.bet_stake
-                            unique_user.balance = (unique_user.balance + amount) + excess_margin
+                            unique_user.balance = (unique_user.balance + amount)
+
+                            unique_user.margin = unique_user.margin + ((i.bet_settlement - market.market_so_far) * i.bet_stake)
                             unique_user.put()
 
                         if i.bet_action == "SELL":
                             amount = (i.bet_price - i.bet_settlement) * i.bet_stake
                             unique_user.balance = unique_user.balance + amount
+
+                            unique_user.margin = unique_user.margin + i.bet_margin + amount
                             unique_user.put()
 
 
-            if updated_so_far != 0:
+            if updated_so_far != market.market_so_far:
                 if bet.count()>0:
                     for i in bet:
                         if i.bet_action == "BUY":
                             bet_margin = (updated_so_far - market.market_so_far) * i.bet_stake
-                            unique_user.balance = unique_user.balance + bet_margin
+                            unique_user.margin = unique_user.margin + bet_margin
                             unique_user.put()
 
                         if i.bet_action == "SELL":
                             bet_margin = (updated_so_far - market.market_so_far) * i.bet_stake
-                            unique_user.balance = unique_user.balance - bet_margin
+                            unique_user.margin = unique_user.margin + bet_margin
                             unique_user.put()
 
 
