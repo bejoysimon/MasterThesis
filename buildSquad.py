@@ -30,7 +30,7 @@ class BuildSquad(webapp2.RequestHandler):
         squad_key = ndb.Key('MySquad', username)
         squad = squad_key.get()
 
-        img = '/static/blank_player_pic.png'
+        img = '/static/Aguero.png'
 
         query_all = PlayersData.query()
         query_gkp = PlayersData.query(PlayersData.position == 'GKP')
